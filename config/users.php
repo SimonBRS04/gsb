@@ -9,4 +9,7 @@ return [
     ],
 
     'Auth.Authentication.serviceLoader' => \App\Loader\AppAuthenticationServiceLoader::class,
+    'Auth.AuthorizationMiddleware' => $config,
+    'Auth.AuthorizationComponent.enabled' => false,
+    'Auth.Authorization.serviceLoader' => \App\Loader\AppAuthorizationServiceLoader::class,
 ];

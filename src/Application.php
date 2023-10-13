@@ -132,7 +132,9 @@ class Application extends BaseApplication
         Configure::write('Users.config', ['users']);
         $this->addPlugin('Authentication');
         Configure::write('Auth.AuthenticationComponent.load', false);
-        
+        $this->addPlugin('Authorization');
+
+
         $this->addPlugin('Migrations');
 
         // Load more plugins here
