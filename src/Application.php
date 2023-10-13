@@ -128,7 +128,7 @@ class Application extends BaseApplication
     {
         $this->addOptionalPlugin('Cake/Repl');
         $this->addOptionalPlugin('Bake');
-
+        $this->addPlugin(\CakeDC\Users\Plugin::class);
         $this->addPlugin('Migrations');
 
         // Load more plugins here
