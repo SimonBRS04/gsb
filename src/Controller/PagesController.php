@@ -69,5 +69,9 @@ class PagesController extends AppController
             }
             throw new NotFoundException();
         }
+        $authenticationConfig = Configure::read('Auth.AuthenticationComponent');
+        $this->loadComponent('Authentication.Authentication', $authenticationConfig);
+        $userId = $this->Authentication->getIdentity()->getIdentifier();
+        $user = $this->Authentication->getIdentity()->getOriginalData();
     }
 }
