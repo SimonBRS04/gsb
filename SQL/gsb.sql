@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 17 oct. 2023 à 11:11
+-- Généré le : mar. 17 oct. 2023 à 11:20
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.0.28
 
@@ -108,19 +108,6 @@ CREATE TABLE `forfaits` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `lignefraishorsforfaits`
---
-
-CREATE TABLE `lignefraishorsforfaits` (
-  `id` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `montant` float NOT NULL,
-  `libelle` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `lignesforfaits`
 --
 
@@ -128,6 +115,19 @@ CREATE TABLE `lignesforfaits` (
   `id` int(11) NOT NULL,
   `forfait_id` int(11) NOT NULL,
   `quantite` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `lignesfraishorsforfaits`
+--
+
+CREATE TABLE `lignesfraishorsforfaits` (
+  `id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `montant` float NOT NULL,
+  `libelle` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -234,17 +234,17 @@ ALTER TABLE `forfaits`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `lignefraishorsforfaits`
---
-ALTER TABLE `lignefraishorsforfaits`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Index pour la table `lignesforfaits`
 --
 ALTER TABLE `lignesforfaits`
   ADD PRIMARY KEY (`id`),
   ADD KEY `forfait_id_fk` (`forfait_id`);
+
+--
+-- Index pour la table `lignesfraishorsforfaits`
+--
+ALTER TABLE `lignesfraishorsforfaits`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `social_accounts`
@@ -282,15 +282,15 @@ ALTER TABLE `forfaits`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `lignefraishorsforfaits`
---
-ALTER TABLE `lignefraishorsforfaits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT pour la table `lignesforfaits`
 --
 ALTER TABLE `lignesforfaits`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `lignesfraishorsforfaits`
+--
+ALTER TABLE `lignesfraishorsforfaits`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -316,7 +316,7 @@ ALTER TABLE `fichesfraislignes`
 --
 ALTER TABLE `fichesfraisligneshorsforfaits`
   ADD CONSTRAINT `fichefrais_id_fk` FOREIGN KEY (`fichefrais_id`) REFERENCES `fiches` (`id`),
-  ADD CONSTRAINT `lignefraisht_id_fk` FOREIGN KEY (`lignefraishf_id`) REFERENCES `lignefraishorsforfaits` (`id`);
+  ADD CONSTRAINT `lignefraisht_id_fk` FOREIGN KEY (`lignefraishf_id`) REFERENCES `lignesfraishorsforfaits` (`id`);
 
 --
 -- Contraintes pour la table `lignesforfaits`
