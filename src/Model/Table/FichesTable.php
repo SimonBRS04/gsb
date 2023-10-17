@@ -45,6 +45,7 @@ class FichesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Users', [
+            'className'=>'CakeDC/Users.Users',
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
         ]);
