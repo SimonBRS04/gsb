@@ -54,7 +54,7 @@ class Application extends BaseApplication
                 (new TableLocator())->allowFallbackClass(false)
             );
         }
-
+        $this->addPlugin(\CakeDC\Users\Plugin::class);
         /*
          * Only try to load DebugKit in development mode
          * Debug Kit should not be installed on a production system
