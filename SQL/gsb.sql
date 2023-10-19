@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 17 oct. 2023 à 11:20
+-- Généré le : jeu. 19 oct. 2023 à 11:15
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.0.28
 
@@ -55,6 +55,17 @@ CREATE TABLE `etats` (
   `libelle` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `etats`
+--
+
+INSERT INTO `etats` (`id`, `libelle`) VALUES
+(1, 'Créée'),
+(2, 'Clôturée'),
+(3, 'Validée'),
+(4, 'Mise en paiement'),
+(5, 'Remboursée');
+
 -- --------------------------------------------------------
 
 --
@@ -70,6 +81,13 @@ CREATE TABLE `fiches` (
   `montantvalide` tinyint(1) NOT NULL,
   `datemodif` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `fiches`
+--
+
+INSERT INTO `fiches` (`id`, `user_id`, `etat_id`, `moisannee`, `nbjustificatifs`, `montantvalide`, `datemodif`) VALUES
+(1, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 3, '022022', 0, 0, '2023-10-17');
 
 -- --------------------------------------------------------
 
@@ -267,13 +285,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `etats`
 --
 ALTER TABLE `etats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `fiches`
 --
 ALTER TABLE `fiches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `forfaits`
