@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 13 oct. 2023 à 10:22
+-- Généré le : jeu. 19 oct. 2023 à 11:15
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.0.28
 
@@ -47,21 +47,32 @@ INSERT INTO `cake_d_c_users_phinxlog` (`version`, `migration_name`, `start_time`
 -- --------------------------------------------------------
 
 --
--- Structure de la table `etat`
+-- Structure de la table `etats`
 --
 
-CREATE TABLE `etat` (
+CREATE TABLE `etats` (
   `id` int(11) NOT NULL,
   `libelle` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `etats`
+--
+
+INSERT INTO `etats` (`id`, `libelle`) VALUES
+(1, 'Créée'),
+(2, 'Clôturée'),
+(3, 'Validée'),
+(4, 'Mise en paiement'),
+(5, 'Remboursée');
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `fiche`
+-- Structure de la table `fiches`
 --
 
-CREATE TABLE `fiche` (
+CREATE TABLE `fiches` (
   `id` int(11) NOT NULL,
   `user_id` char(36) NOT NULL,
   `etat_id` int(11) NOT NULL,
@@ -71,13 +82,20 @@ CREATE TABLE `fiche` (
   `datemodif` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `fiches`
+--
+
+INSERT INTO `fiches` (`id`, `user_id`, `etat_id`, `moisannee`, `nbjustificatifs`, `montantvalide`, `datemodif`) VALUES
+(1, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 3, '022022', 0, 0, '2023-10-17');
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `fichefraisligne`
+-- Structure de la table `fichesfraislignes`
 --
 
-CREATE TABLE `fichefraisligne` (
+CREATE TABLE `fichesfraislignes` (
   `fiche_id` int(11) NOT NULL,
   `ligneforfait_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -85,10 +103,10 @@ CREATE TABLE `fichefraisligne` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `fichefraislignefraishorsforfait`
+-- Structure de la table `fichesfraisligneshorsforfaits`
 --
 
-CREATE TABLE `fichefraislignefraishorsforfait` (
+CREATE TABLE `fichesfraisligneshorsforfaits` (
   `lignefraishf_id` int(11) NOT NULL,
   `fichefrais_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -96,10 +114,10 @@ CREATE TABLE `fichefraislignefraishorsforfait` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `forfait`
+-- Structure de la table `forfaits`
 --
 
-CREATE TABLE `forfait` (
+CREATE TABLE `forfaits` (
   `id` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
   `prix` float NOT NULL
@@ -108,10 +126,10 @@ CREATE TABLE `forfait` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ligneforfait`
+-- Structure de la table `lignesforfaits`
 --
 
-CREATE TABLE `ligneforfait` (
+CREATE TABLE `lignesforfaits` (
   `id` int(11) NOT NULL,
   `forfait_id` int(11) NOT NULL,
   `quantite` int(11) NOT NULL
@@ -120,10 +138,10 @@ CREATE TABLE `ligneforfait` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `lignefraishorsforfait`
+-- Structure de la table `lignesfraishorsforfaits`
 --
 
-CREATE TABLE `lignefraishorsforfait` (
+CREATE TABLE `lignesfraishorsforfaits` (
   `id` int(11) NOT NULL,
   `date` date NOT NULL,
   `montant` float NOT NULL,
@@ -187,7 +205,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `first_name`, `last_name`, `token`, `token_expires`, `api_token`, `activation_date`, `secret`, `secret_verified`, `tos_date`, `active`, `is_superuser`, `role`, `created`, `modified`, `additional_data`) VALUES
-('4830675b-9bf3-4cf1-be59-576048fc5b0e', 'superadmin', 'superadmin@example.com', '$2y$10$7iN3xocQ2C6v0eaO6sGak.NrSek3moml2ibjWa0A.3Cf1kFR3JRuq', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 'superuser', '2023-10-13 08:12:24', '2023-10-13 08:12:24', NULL);
+('d56a9b83-b3aa-4bae-8884-07665b414a45', 'simon', 'simon.brsi@gmail.com', '$2y$10$14SoJlI3alzJQh1hwWuCrO2t1/IqohtlMN87pOiwHmjndxGBEBzaS', 'simon', 'simon', 'dd2601449eda295c8301b92f76603d4d', '2023-10-17 09:35:36', NULL, NULL, NULL, NULL, '2023-10-17 08:35:36', 1, 1, 'superuser', '2023-10-17 08:35:36', '2023-10-17 08:35:36', NULL);
 
 --
 -- Index pour les tables déchargées
@@ -200,50 +218,50 @@ ALTER TABLE `cake_d_c_users_phinxlog`
   ADD PRIMARY KEY (`version`);
 
 --
--- Index pour la table `etat`
+-- Index pour la table `etats`
 --
-ALTER TABLE `etat`
+ALTER TABLE `etats`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `fiche`
+-- Index pour la table `fiches`
 --
-ALTER TABLE `fiche`
+ALTER TABLE `fiches`
   ADD PRIMARY KEY (`id`),
   ADD KEY `etat_id_fk` (`etat_id`),
   ADD KEY `users_id_fk` (`user_id`);
 
 --
--- Index pour la table `fichefraisligne`
+-- Index pour la table `fichesfraislignes`
 --
-ALTER TABLE `fichefraisligne`
+ALTER TABLE `fichesfraislignes`
   ADD KEY `fiche_id_fk` (`fiche_id`),
   ADD KEY `ligneforfait_id_fk` (`ligneforfait_id`);
 
 --
--- Index pour la table `fichefraislignefraishorsforfait`
+-- Index pour la table `fichesfraisligneshorsforfaits`
 --
-ALTER TABLE `fichefraislignefraishorsforfait`
+ALTER TABLE `fichesfraisligneshorsforfaits`
   ADD KEY `lignefraisht_id_fk` (`lignefraishf_id`),
   ADD KEY `fichefrais_id_fk` (`fichefrais_id`);
 
 --
--- Index pour la table `forfait`
+-- Index pour la table `forfaits`
 --
-ALTER TABLE `forfait`
+ALTER TABLE `forfaits`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `ligneforfait`
+-- Index pour la table `lignesforfaits`
 --
-ALTER TABLE `ligneforfait`
+ALTER TABLE `lignesforfaits`
   ADD PRIMARY KEY (`id`),
   ADD KEY `forfait_id_fk` (`forfait_id`);
 
 --
--- Index pour la table `lignefraishorsforfait`
+-- Index pour la table `lignesfraishorsforfaits`
 --
-ALTER TABLE `lignefraishorsforfait`
+ALTER TABLE `lignesfraishorsforfaits`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -264,33 +282,33 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT pour la table `etat`
+-- AUTO_INCREMENT pour la table `etats`
 --
-ALTER TABLE `etat`
+ALTER TABLE `etats`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT pour la table `fiches`
+--
+ALTER TABLE `fiches`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `forfaits`
+--
+ALTER TABLE `forfaits`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `fiche`
+-- AUTO_INCREMENT pour la table `lignesforfaits`
 --
-ALTER TABLE `fiche`
+ALTER TABLE `lignesforfaits`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `forfait`
+-- AUTO_INCREMENT pour la table `lignesfraishorsforfaits`
 --
-ALTER TABLE `forfait`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `ligneforfait`
---
-ALTER TABLE `ligneforfait`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `lignefraishorsforfait`
---
-ALTER TABLE `lignefraishorsforfait`
+ALTER TABLE `lignesfraishorsforfaits`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -298,31 +316,31 @@ ALTER TABLE `lignefraishorsforfait`
 --
 
 --
--- Contraintes pour la table `fiche`
+-- Contraintes pour la table `fiches`
 --
-ALTER TABLE `fiche`
-  ADD CONSTRAINT `etat_id_fk` FOREIGN KEY (`etat_id`) REFERENCES `etat` (`id`),
+ALTER TABLE `fiches`
+  ADD CONSTRAINT `etat_id_fk` FOREIGN KEY (`etat_id`) REFERENCES `etats` (`id`),
   ADD CONSTRAINT `users_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Contraintes pour la table `fichefraisligne`
+-- Contraintes pour la table `fichesfraislignes`
 --
-ALTER TABLE `fichefraisligne`
-  ADD CONSTRAINT `fiche_id_fk` FOREIGN KEY (`fiche_id`) REFERENCES `fiche` (`id`),
-  ADD CONSTRAINT `ligneforfait_id_fk` FOREIGN KEY (`ligneforfait_id`) REFERENCES `ligneforfait` (`id`);
+ALTER TABLE `fichesfraislignes`
+  ADD CONSTRAINT `fiche_id_fk` FOREIGN KEY (`fiche_id`) REFERENCES `fiches` (`id`),
+  ADD CONSTRAINT `ligneforfait_id_fk` FOREIGN KEY (`ligneforfait_id`) REFERENCES `lignesforfaits` (`id`);
 
 --
--- Contraintes pour la table `fichefraislignefraishorsforfait`
+-- Contraintes pour la table `fichesfraisligneshorsforfaits`
 --
-ALTER TABLE `fichefraislignefraishorsforfait`
-  ADD CONSTRAINT `fichefrais_id_fk` FOREIGN KEY (`fichefrais_id`) REFERENCES `fiche` (`id`),
-  ADD CONSTRAINT `lignefraisht_id_fk` FOREIGN KEY (`lignefraishf_id`) REFERENCES `lignefraishorsforfait` (`id`);
+ALTER TABLE `fichesfraisligneshorsforfaits`
+  ADD CONSTRAINT `fichefrais_id_fk` FOREIGN KEY (`fichefrais_id`) REFERENCES `fiches` (`id`),
+  ADD CONSTRAINT `lignefraisht_id_fk` FOREIGN KEY (`lignefraishf_id`) REFERENCES `lignesfraishorsforfaits` (`id`);
 
 --
--- Contraintes pour la table `ligneforfait`
+-- Contraintes pour la table `lignesforfaits`
 --
-ALTER TABLE `ligneforfait`
-  ADD CONSTRAINT `forfait_id_fk` FOREIGN KEY (`forfait_id`) REFERENCES `forfait` (`id`);
+ALTER TABLE `lignesforfaits`
+  ADD CONSTRAINT `forfait_id_fk` FOREIGN KEY (`forfait_id`) REFERENCES `forfaits` (`id`);
 
 --
 -- Contraintes pour la table `social_accounts`

@@ -54,7 +54,8 @@ class Application extends BaseApplication
                 (new TableLocator())->allowFallbackClass(false)
             );
         }
-
+        $this->addPlugin(\CakeDC\Users\Plugin::class);
+        Configure::write('Users.config', ['users']);
         /*
          * Only try to load DebugKit in development mode
          * Debug Kit should not be installed on a production system
@@ -128,7 +129,7 @@ class Application extends BaseApplication
     {
         $this->addOptionalPlugin('Cake/Repl');
         $this->addOptionalPlugin('Bake');
-        $this->addPlugin(\CakeDC\Users\Plugin::class);
+        // $this->addPlugin(\CakeDC\Users\Plugin::class);
         $this->addPlugin('Migrations');
 
         // Load more plugins here
