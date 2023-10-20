@@ -41,8 +41,20 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
         </div>
         <div class="top-nav-links">
-            <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/">Documentation</a>
-            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
+        <?php
+        echo $this->Html->Link('Fiches (o)', ['plugin' => NULL, 'controller'=>'fiches']);
+        echo $this->Html->Link('LignesF (/)', ['plugin' => NULL, 'controller'=>'lignesforfaits']);
+        echo $this->Html->Link('LignesHF (/)', ['plugin' => NULL, 'controller'=>'lignesfraishorsforfaits']);
+        echo $this->Html->Link('Etats (x)', ['plugin' => NULL, 'controller'=>'etats']);
+        echo $this->Html->Link('Forfaits (x)', ['plugin' => NULL, 'controller'=>'forfaits']);
+        echo $this->Html->Link('Users (x)', ['plugin'=>'CakeDC/Users', 'controller'=>'users', 'action'=>'index']);        
+        echo $this->Html->Link(
+            'Disconnect', 
+            ['plugin'=>'CakeDC/Users', 'controller'=>'users', 'action'=>'logout'], 
+            ['onclick' => "return confirm('Êtes-vous sûr de vouloir vous déconnecter ?');"]
+        );        
+        ?>
+
         </div>
     </nav>
     <main class="main">

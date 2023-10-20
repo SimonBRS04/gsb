@@ -25,11 +25,11 @@
                 <?php foreach ($fiches as $fich): ?>
                 <tr>
                     <td><?= $this->Number->format($fich->id) ?></td>
-                    <td><?= $fich->has('user') ? $this->Html->link($fich->user->id, ['controller' => 'Users', 'action' => 'view', $fich->user->id]) : '' ?></td>
-                    <td><?= $fich->has('etat') ? $this->Html->link($fich->etat->id, ['controller' => 'Etats', 'action' => 'view', $fich->etat->id]) : '' ?></td>
+                    <td><?= $fich->has('user') ? $this->Html->link($fich->user->username, ['controller' => 'Users', 'action' => 'view', $fich->user->id]) : '' ?></td>
+                    <td><?= $fich->has('etat') ? $this->Html->link($fich->etat->libelle, ['controller' => 'Etats', 'action' => 'view', $fich->etat->id]) : '' ?></td>
                     <td><?= h($fich->moisannee) ?></td>
                     <td><?= $this->Number->format($fich->nbjustificatifs) ?></td>
-                    <td><?= h($fich->montantvalide) ?></td>
+                    <td><?php if (($fich->montantvalide) == 1){echo "Valide";}else{echo "Non-valide";}?></td>
                     <td><?= h($fich->datemodif) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $fich->id]) ?>

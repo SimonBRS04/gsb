@@ -40,7 +40,7 @@ class ForfaitsTable extends Table
         parent::initialize($config);
 
         $this->setTable('forfaits');
-        $this->setDisplayField('id');
+        $this->setDisplayField('type');
         $this->setPrimaryKey('id');
 
         $this->hasMany('Lignesforfaits', [

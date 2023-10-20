@@ -16,11 +16,11 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="lignesforfaits view content">
-            <h3><?= h($lignesforfait->id) ?></h3>
+            <h3><?= h($lignesforfait->forfait->type) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Forfait') ?></th>
-                    <td><?= $lignesforfait->has('forfait') ? $this->Html->link($lignesforfait->forfait->id, ['controller' => 'Forfaits', 'action' => 'view', $lignesforfait->forfait->id]) : '' ?></td>
+                    <td><?= $lignesforfait->has('forfait') ? $this->Html->link($lignesforfait->forfait->type, ['controller' => 'Forfaits', 'action' => 'view', $lignesforfait->forfait->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>

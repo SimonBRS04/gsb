@@ -21,12 +21,12 @@
                 <?php foreach ($lignesforfaits as $lignesforfait): ?>
                 <tr>
                     <td><?= $this->Number->format($lignesforfait->id) ?></td>
-                    <td><?= $lignesforfait->has('forfait') ? $this->Html->link($lignesforfait->forfait->id, ['controller' => 'Forfaits', 'action' => 'view', $lignesforfait->forfait->id]) : '' ?></td>
+                    <td><?= $lignesforfait->has('forfait') ? $this->Html->link($lignesforfait->forfait->type, ['controller' => 'Forfaits', 'action' => 'view', $lignesforfait->forfait->id]) : '' ?></td>
                     <td><?= $this->Number->format($lignesforfait->quantite) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $lignesforfait->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $lignesforfait->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $lignesforfait->id], ['confirm' => __('Are you sure you want to delete # {0}?', $lignesforfait->id)]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $lignesforfait->id], ['confirm' => __('Are you sure you want to delete {0} ?', $lignesforfait->forfait->type)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
