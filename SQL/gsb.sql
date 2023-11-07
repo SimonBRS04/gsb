@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 19 oct. 2023 à 11:15
+-- Généré le : mar. 07 nov. 2023 à 11:43
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.0.28
 
@@ -87,7 +87,9 @@ CREATE TABLE `fiches` (
 --
 
 INSERT INTO `fiches` (`id`, `user_id`, `etat_id`, `moisannee`, `nbjustificatifs`, `montantvalide`, `datemodif`) VALUES
-(1, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 3, '022022', 0, 0, '2023-10-17');
+(1, '58b3c92c-7290-4793-92b7-bb0471552f06', 3, '022022', 0, 1, '2023-10-17'),
+(2, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 4, '022001', 3, 0, '2023-10-06'),
+(3, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 3, '042015', 5, 1, '2023-10-19');
 
 -- --------------------------------------------------------
 
@@ -123,6 +125,17 @@ CREATE TABLE `forfaits` (
   `prix` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `forfaits`
+--
+
+INSERT INTO `forfaits` (`id`, `type`, `prix`) VALUES
+(2, 'Hôtel', 70),
+(3, 'Taxi', 15),
+(4, 'Restaurant', 30),
+(5, 'Train', 30),
+(6, 'Avion', 120);
+
 -- --------------------------------------------------------
 
 --
@@ -134,6 +147,17 @@ CREATE TABLE `lignesforfaits` (
   `forfait_id` int(11) NOT NULL,
   `quantite` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `lignesforfaits`
+--
+
+INSERT INTO `lignesforfaits` (`id`, `forfait_id`, `quantite`) VALUES
+(2, 2, 0),
+(3, 3, 0),
+(4, 4, 0),
+(5, 5, 0),
+(6, 6, 0);
 
 -- --------------------------------------------------------
 
@@ -147,6 +171,13 @@ CREATE TABLE `lignesfraishorsforfaits` (
   `montant` float NOT NULL,
   `libelle` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `lignesfraishorsforfaits`
+--
+
+INSERT INTO `lignesfraishorsforfaits` (`id`, `date`, `montant`, `libelle`) VALUES
+(3, '2023-10-04', 60, 'BAR');
 
 -- --------------------------------------------------------
 
@@ -205,7 +236,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `first_name`, `last_name`, `token`, `token_expires`, `api_token`, `activation_date`, `secret`, `secret_verified`, `tos_date`, `active`, `is_superuser`, `role`, `created`, `modified`, `additional_data`) VALUES
-('d56a9b83-b3aa-4bae-8884-07665b414a45', 'simon', 'simon.brsi@gmail.com', '$2y$10$14SoJlI3alzJQh1hwWuCrO2t1/IqohtlMN87pOiwHmjndxGBEBzaS', 'simon', 'simon', 'dd2601449eda295c8301b92f76603d4d', '2023-10-17 09:35:36', NULL, NULL, NULL, NULL, '2023-10-17 08:35:36', 1, 1, 'superuser', '2023-10-17 08:35:36', '2023-10-17 08:35:36', NULL);
+('58b3c92c-7290-4793-92b7-bb0471552f06', 'invite', 'invite@gmail.com', '$2y$10$yg7OO97Jv/QCVJIGO/IaoesnWmS55G5C9iio83ABKB2CsbvTRPVkC', 'invité', 'juste invité en fait', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 'user', '2023-10-19 13:25:58', '2023-10-19 13:25:58', NULL),
+('d56a9b83-b3aa-4bae-8884-07665b414a45', 'simon', 'simon.brsi@gmail.com', '$2y$10$14SoJlI3alzJQh1hwWuCrO2t1/IqohtlMN87pOiwHmjndxGBEBzaS', 'simon', 'BRISSE', 'dd2601449eda295c8301b92f76603d4d', '2023-10-17 09:35:36', '', '2023-10-19 12:55:20', NULL, NULL, '2023-10-17 08:35:36', 1, 1, 'superuser', '2023-10-17 08:35:36', '2023-10-19 13:25:21', NULL),
+('dd6ede18-8dea-4935-b5fb-9970166e5e30', 'user', 'user@us.er', '$2y$10$4JAYiC/9NZe.sJWc8XZGUOEgG2BJ8cU0K1AaIPktmyfk0CxTd5tNy', 'user', 'user', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 'user', '2023-10-20 09:32:39', '2023-10-20 09:32:39', NULL);
 
 --
 -- Index pour les tables déchargées
@@ -291,25 +324,25 @@ ALTER TABLE `etats`
 -- AUTO_INCREMENT pour la table `fiches`
 --
 ALTER TABLE `fiches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `forfaits`
 --
 ALTER TABLE `forfaits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `lignesforfaits`
 --
 ALTER TABLE `lignesforfaits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `lignesfraishorsforfaits`
 --
 ALTER TABLE `lignesfraishorsforfaits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Contraintes pour les tables déchargées
