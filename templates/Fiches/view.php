@@ -8,10 +8,10 @@
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Fich'), ['action' => 'edit', $fich->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Fich'), ['action' => 'delete', $fich->id], ['confirm' => __('Are you sure you want to delete # {0}?', $fich->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Fiches'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Fich'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Editer Fiche'), ['action' => 'edit', $fich->id], ['class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(__('Supprimer Fiche'), ['action' => 'delete', $fich->id], ['confirm' => __('Voulez-vous vraiment supprimer la fiche # {0}?', $fich->id), 'class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Lister Fiches'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Nouvelle Fiche'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
@@ -20,12 +20,11 @@
             <table>
                 <tr>
                     <th><?= __('User') ?></th>
-                    <td><?= $fich->has('user') ? $this->Html->link($fich->user->id, ['controller' => 'Users', 'action' => 'view', $fich->user->id]) : '' ?></td>
+                    <td><?= $fich->has('user') ? $this->Html->link($fich->user->username, ['controller' => 'Users', 'action' => 'view', $fich->user->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Etat') ?></th>
-                    <td><?= $fich->has('etat') ? $this->Html->link($fich->etat->id, ['controller' => 'Etats', 'action' => 'view', $fich->etat->id]) : '' ?></td>
-                </tr>
+                    <td><?= $fich->has('etat') ? $this->Html->link($fich->etat->libelle, ['controller' => 'Etats', 'action' => 'view', $fich->etat->id]) : '' ?></td>                </tr>
                 <tr>
                     <th><?= __('Moisannee') ?></th>
                     <td><?= h($fich->moisannee) ?></td>

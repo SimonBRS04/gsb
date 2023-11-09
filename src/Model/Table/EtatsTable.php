@@ -40,7 +40,7 @@ class EtatsTable extends Table
         parent::initialize($config);
 
         $this->setTable('etats');
-        $this->setDisplayField('id');
+        $this->setDisplayField('libelle');
         $this->setPrimaryKey('id');
 
         $this->hasMany('Fiches', [
