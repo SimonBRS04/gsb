@@ -16,7 +16,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="fiches view content">
-            <h3><?= h($fich->id) ?></h3>
+            <h3><?= "Fiche ",h($fich->id) ?></h3>
             <table>
                 <tr>
                     <th><?= __('User') ?></th>

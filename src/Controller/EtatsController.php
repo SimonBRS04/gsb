@@ -33,7 +33,7 @@ class EtatsController extends AppController
     public function view($id = null)
     {
         $etat = $this->Etats->get($id, [
-            'contain' => ['Fiches'],
+            'contain' => ['Fiches','Fiches.Users'],
         ]);
 
         $this->set(compact('etat'));

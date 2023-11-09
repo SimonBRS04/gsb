@@ -14,7 +14,7 @@
  * @var \App\View\AppView $this
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'Créateur de Fiches';
 ?>
 <!DOCTYPE html>
 <html>
