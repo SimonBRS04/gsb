@@ -47,7 +47,8 @@ $cakeDescription = 'Créateur de Fiches';
         echo $this->Html->Link('LignesHF (/)', ['plugin' => NULL, 'controller'=>'lignesfraishorsforfaits']);
         echo $this->Html->Link('Etats (x)', ['plugin' => NULL, 'controller'=>'etats']);
         echo $this->Html->Link('Forfaits (x)', ['plugin' => NULL, 'controller'=>'forfaits']);
-        echo $this->Html->Link('Users (x)', ['plugin'=>'CakeDC/Users', 'controller'=>'users', 'action'=>'index']);        
+        echo $this->Html->Link('Users (x)', ['plugin'=>'CakeDC/Users', 'controller'=>'users', 'action'=>'index']);    
+        echo $this->Html->Link('Profil (o)', ['plugin'=>'CakeDC/Users', 'controller'=>'users', 'action'=>'profile']);            
         echo $this->Html->Link(
             'Disconnect', 
             ['plugin'=>'CakeDC/Users', 'controller'=>'users', 'action'=>'logout'], 
