@@ -13,7 +13,7 @@
             <?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $fich->id],
-                ['confirm' => __('Voulez-vous vraiment supprimer la fiche # {0}?', $fich->id), 'class' => 'side-nav-item']
+                ['confirm' => __('Voulez-vous vraiment supprimer la fiche n°{0}?', $fich->id), 'class' => 'side-nav-item']
             ) ?>
             <?= $this->Html->link(__('List Fiches'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>

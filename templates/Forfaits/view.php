@@ -7,31 +7,31 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Forfait'), ['action' => 'edit', $forfait->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Forfait'), ['action' => 'delete', $forfait->id], ['confirm' => __('Are you sure you want to delete # {0}?', $forfait->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Forfaits'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Forfait'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+            <h4 class="heading"><?= __('Menu') ?></h4>
+            <?= $this->Html->link(__('Liste des Forfaits'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Modifier le Forfait'), ['action' => 'edit', $forfait->id], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Nouveau Forfait'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(__('Supprimer le Forfait'), ['action' => 'delete', $forfait->id], ['confirm' => __('Voulez-vous vraiment supprimer le forfait "{0}" ?', $forfait->type), 'class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
         <div class="forfaits view content">
-            <h3><?= h($forfait->id) ?></h3>
+            <h3><?= h($forfait->type) ?></h3>
             <table>
-                <tr>
-                    <th><?= __('Type') ?></th>
-                    <td><?= h($forfait->type) ?></td>
-                </tr>
                 <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($forfait->id) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Type') ?></th>
+                    <td><?= h($forfait->type) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Prix') ?></th>
                     <td><?= $this->Number->format($forfait->prix) ?></td>
                 </tr>
             </table>
-            <div class="related">
+            <!-- <div class="related">
                 <h4><?= __('Related Lignesforfaits') ?></h4>
                 <?php if (!empty($forfait->lignesforfaits)) : ?>
                 <div class="table-responsive">
@@ -57,7 +57,7 @@
                     </table>
                 </div>
                 <?php endif; ?>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

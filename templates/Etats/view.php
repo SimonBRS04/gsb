@@ -11,7 +11,7 @@
             <?= $this->Html->link(__('Créer un nouvel Etat'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('Modifier l\'Etat'), ['action' => 'edit', $etat->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('Liste des Etats'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Supprimer l\'Etat'), ['action' => 'delete', $etat->id], ['confirm' => __('Voulez-vous vraiment supprimer la fiche # {0}?', $etat->id), 'class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(__('Supprimer l\'Etat'), ['action' => 'delete', $etat->id], ['confirm' => __('Voulez-vous vraiment supprimer l\'Etat "{0}" ?', $etat->libelle), 'class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">

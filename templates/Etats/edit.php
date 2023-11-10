@@ -12,7 +12,7 @@
             <?= $this->Form->postLink(
                 __("Supprimer cet Etat"),
                 ['action' => 'delete', $etat->id],
-                ['confirm' => __('Voulez-vous vraiment supprimer la fiche n°{0}?', $etat->id), 'class' => 'side-nav-item']
+                ['confirm' => __('Voulez-vous vraiment supprimer l\'Etat "{0}" ?', $etat->libelle), 'class' => 'side-nav-item']
             ) ?>
         </div>
     </aside>
