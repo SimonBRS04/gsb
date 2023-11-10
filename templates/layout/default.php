@@ -38,7 +38,7 @@ $cakeDescription = 'Créateur de Fiches';
 <body>
     <nav class="top-nav">
         <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
+            <a href="<?= $this->Url->build('/') ?>"><span>AP</span>GSB</a>
         </div>
         <div class="top-nav-links">
         <?php
