@@ -18,7 +18,7 @@
                 <legend><?= __('Ajouter un Forfait') ?></legend>
                 <?php
                     echo $this->Form->control('type');
-                    echo $this->Form->control('Prix');
+                    echo $this->Form->control('prix');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Sauvegarder')) ?>

@@ -53,11 +53,11 @@ class FichesController extends AppController
         if ($this->request->is('post')) {
             $fich = $this->Fiches->patchEntity($fich, $this->request->getData());
             if ($this->Fiches->save($fich)) {
-                $this->Flash->success(__('The fich has been saved.'));
+                $this->Flash->success(__('La fiche a été sauvegardée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The fich could not be saved. Please, try again.'));
+            $this->Flash->error(__('La fiche n\'a pas pu être sauvegardée. Reesayez plus tard.'));
         }
         $users = $this->Fiches->Users->find('list', ['limit' => 200])->all();
         $etats = $this->Fiches->Etats->find('list', ['limit' => 200])->all();
@@ -79,11 +79,11 @@ class FichesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $fich = $this->Fiches->patchEntity($fich, $this->request->getData());
             if ($this->Fiches->save($fich)) {
-                $this->Flash->success(__('The fich has been saved.'));
+                $this->Flash->success(__('La fiche a été sauvegardée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The fich could not be saved. Please, try again.'));
+            $this->Flash->error(__('La fiche n\'a pas pu être sauvegardée. Reesayez plus tard.'));
         }
         $users = $this->Fiches->Users->find('list', ['limit' => 200])->all();
         $etats = $this->Fiches->Etats->find('list', ['limit' => 200])->all();
@@ -102,11 +102,38 @@ class FichesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $fich = $this->Fiches->get($id);
         if ($this->Fiches->delete($fich)) {
-            $this->Flash->success(__('The fich has been deleted.'));
+            $this->Flash->success(__('La fiche a été supprimée.'));
         } else {
-            $this->Flash->error(__('The fich could not be deleted. Please, try again.'));
+            $this->Flash->error(__('La fiche n\'a pas pu être supprimée. Reesayez plus tard.'));
         }
-
+        
         return $this->redirect(['action' => 'index']);
     }
+
+    public function myficheslist()
+    {
+        $this->paginate = [
+            'contain' => ['Users', 'Etats'],
+        ];
+        $fiches = $this->paginate($this->Fiches);
+        $identity = $this->getRequest()->getAttribute('identity');
+            $identity = $identity ?? [];
+            $iduser = $identity["id"];
+        $fiches = $this->paginate($this->Fiches->find('all')->where(['user_id' => $iduser]));
+        $this->set(compact('fiches'));
+    }
+
+    public function myfichesview($id = null)
+    {
+        $this->paginate = [
+            'contain' => ['Users', 'Etats'],
+        ];
+        $fiches = $this->paginate($this->Fiches);
+        $identity = $this->getRequest()->getAttribute('identity');
+            $identity = $identity ?? [];
+            $iduser = $identity["id"];
+        $fiches = $this->paginate($this->Fiches->find('all')->where(['user_id' => $iduser]));
+        $this->set(compact('fiches'));
+    }
+
 }

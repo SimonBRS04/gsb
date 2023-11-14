@@ -13,10 +13,10 @@
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('user_id') ?></th>
-                    <th><?= $this->Paginator->sort('etat_id') ?></th>
                     <th><?= $this->Paginator->sort('moisannee') ?></th>
+                    <th><?= $this->Paginator->sort('etat_id') ?></th>
                     <th><?= $this->Paginator->sort('nbjustificatifs') ?></th>
-                    <th><?= $this->Paginator->sort('montantvalide') ?></th>
+                    <th><?= $this->Paginator->sort('Validité') ?></th>
                     <th><?= $this->Paginator->sort('datemodif') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
@@ -26,8 +26,8 @@
                 <tr>
                     <td><?= $this->Number->format($fich->id) ?></td>
                     <td><?= $fich->has('user') ? $this->Html->link($fich->user->username, ['controller' => 'Users', 'action' => 'view', $fich->user->id]) : '' ?></td>
-                    <td><?= $fich->has('etat') ? $this->Html->link($fich->etat->libelle, ['controller' => 'Etats', 'action' => 'view', $fich->etat->id]) : '' ?></td>
                     <td><?= h($fich->moisannee) ?></td>
+                    <td><?= $fich->has('etat') ? $this->Html->link($fich->etat->libelle, ['controller' => 'Etats', 'action' => 'view', $fich->etat->id]) : '' ?></td>
                     <td><?= $this->Number->format($fich->nbjustificatifs) ?></td>
                     <td><?php if (($fich->montantvalide) == 1){echo "Valide";}else{echo "Non-valide";}?></td>
                     <td><?= h($fich->datemodif) ?></td>
