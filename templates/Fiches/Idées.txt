@@ -1,0 +1,55 @@
+Initiale : 
+
+INSERT INTO `lignesforfaits` (`id`, `forfait_id`, `quantite`) VALUES (NULL, '2', '0'), (NULL, '3', '0'), (NULL, '4', '0'), (NULL, '5', '0'), (NULL, '6', '0'), (NULL, '7', '0') 
+
+INSERT INTO `fiches_lignesforfaits` (`fiche_id`, `ligneforfait_id`) VALUES ('15', '18'), ('15', '19'), ('15', '20'), ('15', '21'), ('15', '22'), ('15', '23') 
+
+
+
+Modifiée : 
+
+INSERT INTO `lignesforfaits` (`id`, `forfait_id`, `quantite`) VALUES ($id_ligne, '2', '0'), ($id_ligne, '3', '0'), ($id_ligne, '4', '0'), ($id_ligne, '5', '0'), ($id_ligne, '6', '0'), ($id_ligne, '7', '0') 
+
+INSERT INTO `fiches_lignesforfaits` (`fiche_id`, `ligneforfait_id`) VALUES ($fich->id, $id_ligne), ($fich->id, $id_ligne), ($fich->id, $id_ligne), ($fich->id, $id_ligne), ($fich->id, $id_ligne), ($fich->id, $id_ligne) 
+
+
+
+Idée : 
+
+foreach ($lignesforfaits as $ligneforfait) {
+	$id_ligne = COMMENT L'AVOIR?
+	INSERT INTO `lignesforfaits` (`id`, `forfait_id`, `quantite`) VALUES ($id_ligne, '$ligneforfait', '0')
+	INSERT INTO `fiches_lignesforfaits` (`fiche_id`, `ligneforfait_id`) VALUES ($fich->id, $id_ligne)
+}
+
+
+
+ChatGPT : 
+
+// Supposons que vous ayez déjà créé la nouvelle fiche et que vous avez son ID dans $fich->id
+
+        $lignesforfaits = $this->Lignesforfaits->find('list')->toArray();
+        
+        foreach ($lignesforfaits as $ligneforfait) {
+            // Insertion dans la table 'lignesforfaits'
+            $this->Lignesforfaits->query()
+                ->insert(['id', 'forfait_id', 'quantite'])
+                ->values([
+                    'id' => null, // Pour que la base de données génère l'ID automatiquement
+                    'forfait_id' => $ligneforfait,
+                    'quantite' => 0,
+                ])
+                ->execute();
+
+            // Récupération de l'ID de la ligne que vous venez de créer
+            $id_ligne = $this->Lignesforfaits->getLastInsertId();
+
+            // Insertion dans la table de liaison 'fiches_lignesforfaits'
+            $this->FichesLignesforfaits->query()
+                ->insert(['fiche_id', 'ligneforfait_id'])
+                ->values([
+                    'fiche_id' => $fich->id,
+                    'ligneforfait_id' => $id_ligne,
+                ])
+                ->execute();
+        }

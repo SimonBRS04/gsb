@@ -53,6 +53,16 @@ class FichesTable extends Table
             'foreignKey' => 'etat_id',
             'joinType' => 'INNER',
         ]);
+        $this->belongsToMany('Lignesforfaits', [
+            'foreignKey' => 'fiche_id',
+            'targetForeignKey' => 'ligneforfait_id',
+            'joinTable' => 'fiches_lignesforfaits',
+        ]);
+        $this->belongsToMany('Lignesfraishorsforfaits', [
+            'foreignKey' => 'fichefrais_id',
+            'targetForeignKey' => 'lignefraishf_id',
+            'joinTable' => 'fiches_lignesfraishorsforfaits',
+        ]);
     }
 
     /**
@@ -77,10 +87,7 @@ class FichesTable extends Table
             ->requirePresence('moisannee', 'create')
             ->notEmptyString('moisannee');
 
-        $validator
-            ->integer('nbjustificatifs')
-            ->requirePresence('nbjustificatifs', 'create')
-            ->notEmptyString('nbjustificatifs');
+        $validator->integer('nbjustificatifs');
 
         $validator
             ->boolean('montantvalide')

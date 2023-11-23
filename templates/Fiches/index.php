@@ -33,6 +33,7 @@
                     <td><?= h($fich->datemodif) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $fich->id]) ?>
+                        <?= $this->Html->link(__('mfView'), ['action' => 'myfichesview', $fich->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $fich->id]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $fich->id], ['confirm' => __('Are you sure you want to delete # {0}?', $fich->id)]) ?>
                     </td>

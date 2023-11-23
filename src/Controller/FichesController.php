@@ -125,15 +125,73 @@ class FichesController extends AppController
 
     public function myfichesview($id = null)
     {
-        $this->paginate = [
-            'contain' => ['Users', 'Etats'],
-        ];
-        $fiches = $this->paginate($this->Fiches);
+        $fich = $this->Fiches->get($id, [
+            'contain' => ['Lignesforfaits','Lignesforfaits.Forfaits','Lignesfraishorsforfaits','Users','Etats'],
+        ]);
         $identity = $this->getRequest()->getAttribute('identity');
             $identity = $identity ?? [];
             $iduser = $identity["id"];
-        $fiches = $this->paginate($this->Fiches->find('all')->where(['user_id' => $iduser]));
-        $this->set(compact('fiches'));
+        $this->set(compact('fich'));
     }
 
+    public function myfichesadd()
+    {
+        $fich = $this->Fiches->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $fich = $this->Fiches->patchEntity($fich, $this->request->getData());
+            $fich->etat_id = 1;
+            $identity = $this->getRequest()->getAttribute('identity');
+            $identity = $identity ?? [];
+            $fich->user_id = $identity["id"];
+            // $fich->datemodif=DATE;
+            // $dateDuJour = Time::now();
+
+            // // Formatez la date pour inclure uniquement le jour, le mois et l'année
+            // $dateFormattee = $dateDuJour->format('d/m/Y');
+
+            if ($this->Fiches->save($fich)) {
+                $this->Flash->success(__('La fiche a été sauvegardée.'));
+
+
+                $forfaits = $this->Fiches->Lignesforfaits->Forfaits->find()->all();
+                $lignes =[];
+                foreach($forfaits as $forfait){
+                    $ligne = $this->Fiches->Lignesforfaits->newEmptyEntity();
+                        $ligne->forfait_id = $forfait->id;
+                        $ligne->quantite = 0;
+                    if($this->Fiches->Lignesforfaits->save($ligne)){
+                        $this->Flash->success(__('La ligne '.$forfait->type.' a été sauvegardée.'));
+                        array_push($lignes,$ligne);
+                    }
+                }
+                $fich->lignesforfaits=$lignes;
+                if ($this->Fiches->save($fich)) {
+                    $this->Flash->success(__('La lignes ont été sauvegardées.'));
+                }
+
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('La fiche n\'a pas pu être sauvegardée. Reesayez plus tard.'));
+        }
+
+        $users = $this->Fiches->Users->find('list', ['limit' => 200])->all();
+        $etats = $this->Fiches->Etats->find('list', ['limit' => 200])->all();
+        $this->set(compact('fich', 'users', 'etats'));
+    }
+
+    public function myfichesaddhf($id = null)
+    {
+        $lignesfraishorsforfait = $this->Lignesfraishorsforfaits->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $lignesfraishorsforfait = $this->Lignesfraishorsforfaits->patchEntity($lignesfraishorsforfait, $this->request->getData());
+            if ($this->Lignesfraishorsforfaits->save($lignesfraishorsforfait)) {
+                $this->Flash->success(__('The lignesfraishorsforfait has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The lignesfraishorsforfait could not be saved. Please, try again.'));
+        }
+        $this->set(compact('lignesfraishorsforfait'));
+    }
 }

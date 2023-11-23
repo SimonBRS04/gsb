@@ -1,5 +1,5 @@
 <div class="fiches index content">
-    <?= $this->Html->link(__('Créer une Nouvelle Fiche'), ['action' => 'myfichesview'], ['class' => 'button float-right']) ?>
+    <?= $this->Html->link(__('Créer une Nouvelle Fiche'), ['action' => 'myfichesadd'], ['class' => 'button float-right']) ?>
     <h3><?= __('Mes factures') ?></h3>
     <div class="table-responsive">
         <table>
@@ -20,10 +20,10 @@
                     <td><?php if (($fich->montantvalide) == 1){echo "Valide";}else{echo "Non-valide";}?></td>
                     <td><?= h($fich->datemodif) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('Voir'), ['action' => 'view', $fich->id]) ?>
+                        <?= $this->Html->link(__('Voir'), ['action' => 'myfichesview', $fich->id]) ?>
                         <?php if($fich->etat->id == 1){ ?>
                             <?= $this->Html->link(__('Modifier'), ['action' => 'edit', $fich->id]) ?>
-                            <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $fich->id], ['confirm' => __('Are you sure you want to delete # {0}?', $fich->id)]) ?>
+                            <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $fich->id],    ['confirm' => __('Are you sure you want to delete # {0}?', $fich->id)]) ?>
                         <?php }?>
                     </td>
                 </tr>

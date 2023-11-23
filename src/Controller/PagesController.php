@@ -69,5 +69,9 @@ class PagesController extends AppController
             }
             throw new NotFoundException();
         }
+
+        $identity = $this->getRequest()->getAttribute('identity');
+            $identity = $identity ?? [];
+            $iduser = $identity["id"];
     }
 }
