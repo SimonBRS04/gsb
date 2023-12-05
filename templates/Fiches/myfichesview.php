@@ -16,6 +16,7 @@
     <h3>Dépense comprise dans le forfait :</h3>    
     <thead>
         <tr>
+            <th><?= $this->Paginator->sort('id') ?></th>
             <th><?= $this->Paginator->sort('forfait') ?></th>
             <th><?= $this->Paginator->sort('quantite') ?></th>
             <th><?= $this->Paginator->sort('prix') ?></th>
@@ -24,17 +25,52 @@
     </thead>
     <tbody>
         
-        <?php
-        $total_f = 0;
+        <?= $this->Form->create(null, ['action' => 'myfichessave']) ?>
+
+        <?php $total_f = 0;
         foreach ($fich->lignesforfaits as $lignesforfait): ?>
+
+
+
+
         <tr>
+            <td><?= h($lignesforfait->forfait->id) ?></td>
             <td><?= h($lignesforfait->forfait->type) ?></td>
-            <td><?= $this->Number->format($lignesforfait->quantite) ?></td>
+
+
+            <td>
+                
+            <?= $this->Number->format($lignesforfait->quantite) ?>
+
+            <?php echo $this->Form->input('l_'.$lignesforfait->forfait->id, [
+                'defaultValue' => 'Valeur par défaut',
+                'value' => $lignesforfait->quantite, 
+            ]); ?>
+
+            </td>
+
+
             <td><?= $this->Number->format($lignesforfait->forfait->prix) ?></td>
             <td><?= ($lignesforfait->forfait->prix * $lignesforfait->quantite) ?></td>
         </tr>
         <?php $total_f = $total_f + ($lignesforfait->forfait->prix * $lignesforfait->quantite) ?>
+
+
+
+
+
         <?php endforeach; ?>
+
+        <?= $this->Form->button(__('Sauvegarder')) ?>
+        <?= $this->Form->end() ?>
+
+
+        <?php $GETDESDATAS = $this->request->getData() ?>
+        <?php debug($GETDESDATAS)?>
+
+
+
+
     </tbody>
 </table>
 
@@ -64,6 +100,8 @@
 
 <br/><?= "Total HF : ", $total_hf?><br/>
 <br/><?= "Total Final : ", ($total_hf + $total_f)?><br/>
+
+
 
 
 

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\I18n\FrozenDate;
 
 /**
  * Fiches Controller
@@ -134,24 +135,35 @@ class FichesController extends AppController
         $this->set(compact('fich'));
     }
 
+    public function myfichessave($id = null){
+        debug($this->request->getData());
+        foreach($this->request->getData() as $key=>$val){
+            if (str_starts_with($key,'l_')){
+                $ligne_id = str_replace('l_', '', $key);
+                echo('Ligne_id obtenue : '.$ligne_id);
+                $ligne = $this->Fiches->Lignesforfaits->get($ligne_id);
+                $ligne->quantite=$val;
+                $this->Fiches->Lignesforfaits->save($ligne);
+            }
+        }
+        return $this->redirect(['action' => 'myfichesview', $id]);
+    }
+
     public function myfichesadd()
     {
         $fich = $this->Fiches->newEmptyEntity();
         if ($this->request->is('post')) {
-            $fich = $this->Fiches->patchEntity($fich, $this->request->getData());
+            $data =  $this->request->getData();
+            $fich = $this->Fiches->patchEntity($fich,$data);
             $fich->etat_id = 1;
             $identity = $this->getRequest()->getAttribute('identity');
             $identity = $identity ?? [];
             $fich->user_id = $identity["id"];
-            // $fich->datemodif=DATE;
-            // $dateDuJour = Time::now();
-
-            // // Formatez la date pour inclure uniquement le jour, le mois et l'année
-            // $dateFormattee = $dateDuJour->format('d/m/Y');
+            $fich->datemodif = FrozenDate::now();
+            $fich->montantvalide = false;
 
             if ($this->Fiches->save($fich)) {
                 $this->Flash->success(__('La fiche a été sauvegardée.'));
-
 
                 $forfaits = $this->Fiches->Lignesforfaits->Forfaits->find()->all();
                 $lignes =[];
