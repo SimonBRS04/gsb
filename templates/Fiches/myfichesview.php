@@ -25,56 +25,42 @@
     </thead>
     <tbody>
         
-        <?= $this->Form->create(null, ['action' => 'myfichessave']) ?>
+        <?= $this->Form->create(null) ?>
 
         <?php $total_f = 0;
         foreach ($fich->lignesforfaits as $lignesforfait): ?>
-
-
-
-
-        <tr>
-            <td><?= h($lignesforfait->forfait->id) ?></td>
-            <td><?= h($lignesforfait->forfait->type) ?></td>
-
-
-            <td>
-                
-            <?= $this->Number->format($lignesforfait->quantite) ?>
-
-            <?php echo $this->Form->input('l_'.$lignesforfait->forfait->id, [
-                'defaultValue' => 'Valeur par défaut',
-                'value' => $lignesforfait->quantite, 
-            ]); ?>
-
-            </td>
-
-
-            <td><?= $this->Number->format($lignesforfait->forfait->prix) ?></td>
-            <td><?= ($lignesforfait->forfait->prix * $lignesforfait->quantite) ?></td>
-        </tr>
-        <?php $total_f = $total_f + ($lignesforfait->forfait->prix * $lignesforfait->quantite) ?>
-
-
-
-
+            <tr>
+                <td>
+                    <?= h($lignesforfait->forfait->id) ?>
+                </td>
+                <td>
+                    <?= h($lignesforfait->forfait->type) ?>
+                </td>
+                <td>
+                <?php echo $this->Form->input('l_'.$lignesforfait->id, [
+                    'defaultValue' => 'Valeur par défaut',
+                    'value' => $lignesforfait->quantite, 
+                ]); ?>
+                </td>
+                <td>
+                    <?= $this->Number->format($lignesforfait->forfait->prix) ?>
+                </td>
+                <td>
+                    <?= ($lignesforfait->forfait->prix * $lignesforfait->quantite) ?>
+                </td>
+            </tr>
+            <?php $total_f = $total_f + ($lignesforfait->forfait->prix * $lignesforfait->quantite) ?>
 
         <?php endforeach; ?>
-
-        <?= $this->Form->button(__('Sauvegarder')) ?>
-        <?= $this->Form->end() ?>
-
-
-        <?php $GETDESDATAS = $this->request->getData() ?>
-        <?php debug($GETDESDATAS)?>
-
-
-
-
+        
     </tbody>
 </table>
 
-<br/><?= "Total F : ", $total_f?><br/><br/>
+<br/><?= $this->Form->button(__('Sauvegarder')) ?>
+<?= $this->Form->end() ?>
+<br/><?= "Total F : ", $total_f?><br/>
+
+<br/>
 
 <table>
     <h3>Autres dépenses :</h3>
@@ -82,7 +68,7 @@
         <tr>
             <th><?= $this->Paginator->sort('libelle') ?></th>
             <th><?= $this->Paginator->sort('montant') ?></th>
-            <th><?= $this->Html->link(__('+'), ['action' => 'myfichesaddhf'], ['class' => 'button float-right']) ?></th>
+            <th><?= $this->Html->link(__('+'), ['action' => 'myfichesaddhf', $fich->id], ['class' => 'button float-right']) ?></th>
         </tr>
     </thead>
     <tbody>
@@ -108,4 +94,3 @@
 <!-- DEBUGS -->
 
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<?= debug($fich) ?>

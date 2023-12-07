@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Lignesfraishorsforfait $lignesfraishorsforfait
+ * @var string[]|\Cake\Collection\CollectionInterface $fiches
  */
 ?>
 <div class="row">
@@ -25,6 +26,7 @@
                     echo $this->Form->control('date');
                     echo $this->Form->control('montant');
                     echo $this->Form->control('libelle');
+                    echo $this->Form->control('fiches._ids', ['options' => $fiches]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

@@ -11,6 +11,8 @@ use Cake\Validation\Validator;
 /**
  * Lignesfraishorsforfaits Model
  *
+ * @property \App\Model\Table\FichesTable&\Cake\ORM\Association\BelongsToMany $Fiches
+ *
  * @method \App\Model\Entity\Lignesfraishorsforfait newEmptyEntity()
  * @method \App\Model\Entity\Lignesfraishorsforfait newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Lignesfraishorsforfait[] newEntities(array $data, array $options = [])
@@ -40,6 +42,12 @@ class LignesfraishorsforfaitsTable extends Table
         $this->setTable('lignesfraishorsforfaits');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
+
+        $this->belongsToMany('Fiches', [
+            'foreignKey' => 'lignesfraishorsforfait_id',
+            'targetForeignKey' => 'fichefrais_id',
+            'joinTable' => 'fiches_lignesfraishorsforfaits',
+        ]);
     }
 
     /**

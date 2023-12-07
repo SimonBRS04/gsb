@@ -33,7 +33,7 @@ class LignesfraishorsforfaitsController extends AppController
     public function view($id = null)
     {
         $lignesfraishorsforfait = $this->Lignesfraishorsforfaits->get($id, [
-            'contain' => [],
+            'contain' => ['Fiches'],
         ]);
 
         $this->set(compact('lignesfraishorsforfait'));
@@ -56,7 +56,8 @@ class LignesfraishorsforfaitsController extends AppController
             }
             $this->Flash->error(__('The lignesfraishorsforfait could not be saved. Please, try again.'));
         }
-        $this->set(compact('lignesfraishorsforfait'));
+        $fiches = $this->Lignesfraishorsforfaits->Fiches->find('list', ['limit' => 200])->all();
+        $this->set(compact('lignesfraishorsforfait', 'fiches'));
     }
 
     /**
@@ -69,7 +70,7 @@ class LignesfraishorsforfaitsController extends AppController
     public function edit($id = null)
     {
         $lignesfraishorsforfait = $this->Lignesfraishorsforfaits->get($id, [
-            'contain' => [],
+            'contain' => ['Fiches'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $lignesfraishorsforfait = $this->Lignesfraishorsforfaits->patchEntity($lignesfraishorsforfait, $this->request->getData());
@@ -80,7 +81,8 @@ class LignesfraishorsforfaitsController extends AppController
             }
             $this->Flash->error(__('The lignesfraishorsforfait could not be saved. Please, try again.'));
         }
-        $this->set(compact('lignesfraishorsforfait'));
+        $fiches = $this->Lignesfraishorsforfaits->Fiches->find('list', ['limit' => 200])->all();
+        $this->set(compact('lignesfraishorsforfait', 'fiches'));
     }
 
     /**

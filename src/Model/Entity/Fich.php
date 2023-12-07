@@ -12,12 +12,14 @@ use Cake\ORM\Entity;
  * @property string $user_id
  * @property int $etat_id
  * @property string $moisannee
- * @property int $nbjustificatifs
+ * @property int|null $nbjustificatifs
  * @property bool $montantvalide
  * @property \Cake\I18n\FrozenDate $datemodif
  *
  * @property \CakeDC\Users\Model\Entity\User $user
  * @property \App\Model\Entity\Etat $etat
+ * @property \App\Model\Entity\Lignesforfait[] $lignesforfaits
+ * @property \App\Model\Entity\Lignesfraishorsforfait[] $lignesfraishorsforfaits
  */
 class Fich extends Entity
 {
@@ -39,5 +41,7 @@ class Fich extends Entity
         'datemodif' => true,
         'user' => true,
         'etat' => true,
+        'lignesforfaits' => true,
+        'lignesfraishorsforfaits' => true,
     ];
 }

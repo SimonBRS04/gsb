@@ -12,9 +12,9 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('libelle') ?></th>
-                    <th><?= $this->Paginator->sort('montant') ?></th>
                     <th><?= $this->Paginator->sort('date') ?></th>
+                    <th><?= $this->Paginator->sort('montant') ?></th>
+                    <th><?= $this->Paginator->sort('libelle') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -22,9 +22,9 @@
                 <?php foreach ($lignesfraishorsforfaits as $lignesfraishorsforfait): ?>
                 <tr>
                     <td><?= $this->Number->format($lignesfraishorsforfait->id) ?></td>
-                    <td><?= h($lignesfraishorsforfait->libelle) ?></td>
-                    <td><?= $this->Number->format($lignesfraishorsforfait->montant) ?></td>
                     <td><?= h($lignesfraishorsforfait->date) ?></td>
+                    <td><?= $this->Number->format($lignesfraishorsforfait->montant) ?></td>
+                    <td><?= h($lignesfraishorsforfait->libelle) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $lignesfraishorsforfait->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $lignesfraishorsforfait->id]) ?>

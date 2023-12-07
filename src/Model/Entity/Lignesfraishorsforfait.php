@@ -12,6 +12,8 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenDate $date
  * @property float $montant
  * @property string $libelle
+ *
+ * @property \App\Model\Entity\Fich[] $fiches
  */
 class Lignesfraishorsforfait extends Entity
 {
@@ -28,5 +30,6 @@ class Lignesfraishorsforfait extends Entity
         'date' => true,
         'montant' => true,
         'libelle' => true,
+        'fiches' => true,
     ];
 }

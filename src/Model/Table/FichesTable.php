@@ -60,7 +60,7 @@ class FichesTable extends Table
         ]);
         $this->belongsToMany('Lignesfraishorsforfaits', [
             'foreignKey' => 'fichefrais_id',
-            'targetForeignKey' => 'lignefraishf_id',
+            'targetForeignKey' => 'lignesfraishorsforfait_id',
             'joinTable' => 'fiches_lignesfraishorsforfaits',
         ]);
     }

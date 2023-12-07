@@ -43,7 +43,6 @@ $cakeDescription = 'Créateur de Fiches';
         <div class="top-nav-links">
         <?php
         echo $this->Html->Link('FichesList (Usr)', ['plugin' => NULL, 'controller'=>'fiches', 'action'=>'myficheslist']);
-        echo $this->Html->Link('FichesView (Usr)', ['plugin' => NULL, 'controller'=>'fiches', 'action'=>'myfichesview']);
         echo $this->Html->Link('Fiches (/)', ['plugin' => NULL, 'controller'=>'fiches']);
         echo $this->Html->Link('LignesF (/)', ['plugin' => NULL, 'controller'=>'lignesforfaits']);
         echo $this->Html->Link('LignesHF (/)', ['plugin' => NULL, 'controller'=>'lignesfraishorsforfaits']);
