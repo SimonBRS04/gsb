@@ -5,17 +5,14 @@
  */
 ?>
 <div class="fiches index content">
-    <?= $this->Html->link(__('Nouvelle Fiche Vide'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Fiches') ?></h3>
+    <h3><?= __('Toutes les Fiches client') ?></h3>
     <div class="table-responsive">
         <table>
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('user_id') ?></th>
                     <th><?= $this->Paginator->sort('moisannee') ?></th>
                     <th><?= $this->Paginator->sort('etat_id') ?></th>
-                    <th><?= $this->Paginator->sort('nbjustificatifs') ?></th>
                     <th><?= $this->Paginator->sort('Validité') ?></th>
                     <th><?= $this->Paginator->sort('datemodif') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -24,16 +21,24 @@
             <tbody>
                 <?php foreach ($fiches as $fich): ?>
                 <tr>
-                    <td><?= $this->Number->format($fich->id) ?></td>
                     <td><?= $fich->has('user') ? $this->Html->link($fich->user->username, ['controller' => 'Users', 'action' => 'view', $fich->user->id]) : '' ?></td>
                     <td><?= h($fich->moisannee) ?></td>
                     <td><?= $fich->has('etat') ? $this->Html->link($fich->etat->libelle, ['controller' => 'Etats', 'action' => 'view', $fich->etat->id]) : '' ?></td>
-                    <td><?= $this->Number->format($fich->nbjustificatifs) ?></td>
                     <td><?php if (($fich->montantvalide) == 1){echo "Valide";}else{echo "Non-valide";}?></td>
+
+
+                    <!-- PERMETTRE LE SWITCH -->
+
+
+
+
+
+
+
+
                     <td><?= h($fich->datemodif) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $fich->id]) ?>
-                        <?= $this->Html->link(__('mfView'), ['action' => 'myfichesview', $fich->id]) ?>
+                        <?= $this->Html->link(__('View'), ['action' => 'myfichesview', $fich->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $fich->id]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $fich->id], ['confirm' => __('Are you sure you want to delete # {0}?', $fich->id)]) ?>
                     </td>

@@ -68,6 +68,7 @@
         <tr>
             <th><?= $this->Paginator->sort('libelle') ?></th>
             <th><?= $this->Paginator->sort('montant') ?></th>
+            <th><?= $this->Paginator->sort('actions') ?></th>
             <th><?= $this->Html->link(__('+'), ['action' => 'myfichesaddhf', $fich->id], ['class' => 'button float-right']) ?></th>
         </tr>
     </thead>
@@ -78,6 +79,8 @@
         <tr>
             <td><?= h($lignesfraishorsforfait->libelle) ?></td>
             <td><?= $this->Number->format($lignesfraishorsforfait->montant) ?></td>
+            <th><?= $this->Html->link(__('Edit'), ['action' => 'edithf', $id, $lignesfraishorsforfait->id]) ?>
+            <?= $this->Form->postLink(__('Supprimer'), ['action' => 'deletehf', $id, $lignesfraishorsforfait->id], ['confirm' => __("Voulez-vous vraiment supprimer {0}?", $lignesfraishorsforfait->libelle)]) ?></th>
         </tr>
         <?php $total_hf = $total_hf + ($lignesfraishorsforfait->montant) ?>
         <?php endforeach; ?>

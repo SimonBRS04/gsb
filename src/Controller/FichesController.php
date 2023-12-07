@@ -54,7 +54,7 @@ class FichesController extends AppController
         if ($this->request->is('post')) {
             $fich = $this->Fiches->patchEntity($fich, $this->request->getData());
             if ($this->Fiches->save($fich)) {
-                $this->Flash->success(__('La fiche a été sauvegardée.'));
+                $this->Flash->success(__('La fiche vide a été sauvegardée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
@@ -82,7 +82,7 @@ class FichesController extends AppController
             if ($this->Fiches->save($fich)) {
                 $this->Flash->success(__('La fiche a été sauvegardée.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'myficheslist']);
             }
             $this->Flash->error(__('La fiche n\'a pas pu être sauvegardée. Reesayez plus tard.'));
         }
@@ -108,7 +108,7 @@ class FichesController extends AppController
             $this->Flash->error(__('La fiche n\'a pas pu être supprimée. Reesayez plus tard.'));
         }
         
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'myficheslist']);
     }
 
     public function myficheslist()
@@ -132,7 +132,7 @@ class FichesController extends AppController
         $identity = $this->getRequest()->getAttribute('identity');
             $identity = $identity ?? [];
             $iduser = $identity["id"];
-        $this->set(compact('fich'));
+        $this->set(compact('fich', 'id'));
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             foreach($this->request->getData() as $key=>$val){
@@ -178,7 +178,7 @@ class FichesController extends AppController
                 if ($this->Fiches->save($fich)) {
                     $this->Flash->success(__('Les lignes ont été sauvegardées.'));
                 }
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'myficheslist']);
             }
             $this->Flash->error(__('La fiche n\'a pas pu être sauvegardée. Reesayez plus tard.'));
         }
@@ -202,4 +202,46 @@ class FichesController extends AppController
         $fiches = $this->Fiches->find('list', ['limit' => 200])->all();
         $this->set(compact('lfhf', 'id', 'fiches'));
     }
+
+    public function deletehf($id = null, $idhf = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $lignesfraishorsforfait = $this->Fiches->Lignesfraishorsforfaits->get($idhf);
+        if ($this->Fiches->Lignesfraishorsforfaits->delete($lignesfraishorsforfait)) {
+            $this->Flash->success(__('The lignesfraishorsforfait has been deleted.'));
+        } else {
+            $this->Flash->error(__('The lignesfraishorsforfait could not be deleted. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'myfichesview', $id]);
+    }
+
+    public function edithf($id = null, $idhf = null)
+    {
+        $lignesfraishorsforfait = $this->Fiches->Lignesfraishorsforfaits->get($idhf, [
+            'contain' => ['Fiches'],
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $lignesfraishorsforfait = $this->Fiches->Lignesfraishorsforfaits->patchEntity($lignesfraishorsforfait, $this->request->getData());
+            if ($this->Fiches->Lignesfraishorsforfaits->save($lignesfraishorsforfait)) {
+                $this->Flash->success(__('The lignesfraishorsforfait has been saved.'));
+
+                return $this->redirect(['action' => 'myfichesview', $id]);
+            }
+            $this->Flash->error(__('The lignesfraishorsforfait could not be saved. Please, try again.'));
+        }
+        $fiches = $this->Fiches->Lignesfraishorsforfaits->Fiches->find('list', ['limit' => 200])->all();
+        $this->set(compact('lignesfraishorsforfait', 'fiches', 'id' ));
+    }
+
+    public function ficheslist()
+    {
+        $this->paginate = [
+            'contain' => ['Users', 'Etats'],
+        ];
+        $fiches = $this->paginate($this->Fiches);
+
+        $this->set(compact('fiches'));
+    }
+
 }
