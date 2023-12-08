@@ -24,16 +24,18 @@
                     <td><?= $fich->has('user') ? $this->Html->link($fich->user->username, ['controller' => 'Users', 'action' => 'view', $fich->user->id]) : '' ?></td>
                     <td><?= h($fich->moisannee) ?></td>
                     <td><?= $fich->has('etat') ? $this->Html->link($fich->etat->libelle, ['controller' => 'Etats', 'action' => 'view', $fich->etat->id]) : '' ?></td>
-                    <td><?php if (($fich->montantvalide) == 1){echo "Valide";}else{echo "Non-valide";}?></td>
+                    <td>
+                        <?php 
+                        if (($fich->montantvalide) == 1){
+                            echo "Valide";
+                        }else{
+                            echo "Non-valide";
+                        }?>
+                        <input type='checkbox' name='case' value='on'>
+                    </td>
 
 
                     <!-- PERMETTRE LE SWITCH -->
-
-
-
-
-
-
 
 
                     <td><?= h($fich->datemodif) ?></td>
