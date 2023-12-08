@@ -1,9 +1,3 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Fich $fich
- */
-?>
 <!-- DEBUT ATTRIBUTION DES DROITS -->
 <?php 
     $identity = $this->getRequest()->getAttribute('identity');
@@ -27,17 +21,6 @@
 <h4>Dernière modification : <?= h($fich->datemodif) ?></h4>
 <h4>Fiche du : <?= h($fich->moisannee) ?></h4>
 
-
-<!-- DEBUT ATTRIBUTION DES DROITS POUR LE COMPTABLE UNIQUEMENT -->
-<?php 
-  if ($role == "comptable" || $role == "superuser" ){
-    ?><h4>Etat actuel de la fiche : <?= h($fich->etat->libelle);?> </h4>
-    <?php echo $this->Html->Link('Valider la fiche', ['action'=>'modifetats', $fich->id, 3], ['class' => 'button']); ?>
-    <?php echo $this->Html->Link('Cloturer la fiche', ['action'=>'modifetats', $fich->id, 2], ['class' => 'button']); 
-  }
-?>
-<!-- FIN ATTRIBUTION DES DROITS POUR LE COMPTABLE UNIQUEMENT -->
-
 <br/>
 
 <table>
@@ -53,6 +36,7 @@
     </thead>
     <tbody>
         
+        <?= $this->Form->create(null) ?>
 
         <?php $total_f = 0;
         foreach ($fich->lignesforfaits as $lignesforfait): ?>
@@ -64,7 +48,10 @@
                     <?= h($lignesforfait->forfait->type) ?>
                 </td>
                 <td>
-                    <?= h($lignesforfait->quantite) ?>
+                <?php echo $this->Form->input('l_'.$lignesforfait->id, [
+                    'defaultValue' => 'Valeur par défaut',
+                    'value' => $lignesforfait->quantite, 
+                ]); ?>
                 </td>
                 <td>
                     <?= $this->Number->format($lignesforfait->forfait->prix) ?>
@@ -80,6 +67,8 @@
     </tbody>
 </table>
 
+<br/><?= $this->Form->button(__('Sauvegarder')) ?>
+<?= $this->Form->end() ?>
 <br/><?= "Total F : ", $total_f?><br/>
 
 <br/>
@@ -90,6 +79,8 @@
         <tr>
             <th><?= $this->Paginator->sort('libelle') ?></th>
             <th><?= $this->Paginator->sort('montant') ?></th>
+            <th><?= $this->Paginator->sort('actions') ?></th>
+            <th><?= $this->Html->link(__('+'), ['action' => 'myfichesaddhf', $fich->id], ['class' => 'button float-right']) ?></th>
         </tr>
     </thead>
     <tbody>
@@ -99,6 +90,8 @@
         <tr>
             <td><?= h($lignesfraishorsforfait->libelle) ?></td>
             <td><?= $this->Number->format($lignesfraishorsforfait->montant) ?></td>
+            <th><?= $this->Html->link(__('Edit'), ['action' => 'edithf', $id, $lignesfraishorsforfait->id]) ?>
+            <?= $this->Form->postLink(__('Supprimer'), ['action' => 'deletehf', $id, $lignesfraishorsforfait->id], ['confirm' => __("Voulez-vous vraiment supprimer {0}?", $lignesfraishorsforfait->libelle)]) ?></th>
         </tr>
         <?php $total_hf = $total_hf + ($lignesfraishorsforfait->montant) ?>
         <?php endforeach; ?>

@@ -15,8 +15,6 @@
                     <th><?= $this->Paginator->sort('user_id') ?></th>
                     <th><?= $this->Paginator->sort('moisannee') ?></th>
                     <th><?= $this->Paginator->sort('etat_id') ?></th>
-                    <th><?= $this->Paginator->sort('nbjustificatifs') ?></th>
-                    <th><?= $this->Paginator->sort('Validité') ?></th>
                     <th><?= $this->Paginator->sort('datemodif') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
@@ -28,14 +26,14 @@
                     <td><?= $fich->has('user') ? $this->Html->link($fich->user->username, ['controller' => 'Users', 'action' => 'view', $fich->user->id]) : '' ?></td>
                     <td><?= h($fich->moisannee) ?></td>
                     <td><?= $fich->has('etat') ? $this->Html->link($fich->etat->libelle, ['controller' => 'Etats', 'action' => 'view', $fich->etat->id]) : '' ?></td>
-                    <td><?= $this->Number->format($fich->nbjustificatifs) ?></td>
-                    <td><?php if (($fich->montantvalide) == 1){echo "Valide";}else{echo "Non-valide";}?></td>
                     <td><?= h($fich->datemodif) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $fich->id]) ?>
-                        <?= $this->Html->link(__('mfView'), ['action' => 'myfichesview', $fich->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $fich->id]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $fich->id], ['confirm' => __('Are you sure you want to delete # {0}?', $fich->id)]) ?>
+                        <br/>
+                        <?= $this->Html->link(__('mfView'), ['action' => 'myfichesview', $fich->id]) ?>
+                        <?= $this->Html->link(__('mfEdit'), ['action' => 'myfichesedit', $fich->id]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

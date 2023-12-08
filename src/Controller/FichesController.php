@@ -134,6 +134,29 @@ class FichesController extends AppController
             $iduser = $identity["id"];
         $this->set(compact('fich', 'id'));
 
+    }
+
+    public function modifetats($id_fich = null, $id_etat = null){
+        $fich = $this->Fiches->get($id_fich, [
+            'contain' => ['Lignesforfaits','Lignesforfaits.Forfaits','Lignesfraishorsforfaits','Users','Etats'],
+        ]);
+        $fich->etat_id = $id_etat;
+        $this->Fiches->save($fich);
+        if ($this->Fiches->save($fich)) {
+            $this->Flash->success(__('La fiche a été sauvegardée.'));
+        }
+        return $this->redirect(['action' => 'myfichesview', $id_fich]);
+    }
+
+    public function myfichesedit($id = null)
+    {
+        $fich = $this->Fiches->get($id, [
+            'contain' => ['Lignesforfaits','Lignesforfaits.Forfaits','Lignesfraishorsforfaits','Users','Etats'],
+        ]);
+        $identity = $this->getRequest()->getAttribute('identity');
+            $identity = $identity ?? [];
+            $iduser = $identity["id"];
+        $this->set(compact('fich', 'id'));
         if ($this->request->is(['patch', 'post', 'put'])) {
             foreach($this->request->getData() as $key=>$val){
                 if (str_starts_with($key,'l_')){
@@ -143,7 +166,12 @@ class FichesController extends AppController
                     $this->Fiches->Lignesforfaits->save($ligne);
                 }
             }
-        return $this->redirect(['action' => 'myfichesview', $id]);
+            $fich->datemodif = FrozenDate::now();
+            $this->Fiches->save($fich);
+            if ($this->Fiches->save($fich)) {
+                $this->Flash->success(__('La fiche a été sauvegardée.'));
+            }
+        return $this->redirect(['action' => 'myfichesedit', $id]);
         }
     }
 
@@ -158,10 +186,8 @@ class FichesController extends AppController
             $identity = $identity ?? [];
             $fich->user_id = $identity["id"];
             $fich->datemodif = FrozenDate::now();
-            $fich->montantvalide = false;
-
             if ($this->Fiches->save($fich)) {
-                $this->Flash->success(__('La fiche a été sauvegardée.'));
+                $this->Flash->success(__('La fiche du '.$fich->moisannee.' a été créée.'));
                 // ADD DES FORFAITS
                 $forfaits = $this->Fiches->Lignesforfaits->Forfaits->find()->all();
                 $lignes =[];
@@ -170,14 +196,10 @@ class FichesController extends AppController
                         $ligne->forfait_id = $forfait->id;
                         $ligne->quantite = 0;
                     if($this->Fiches->Lignesforfaits->save($ligne)){
-                        $this->Flash->success(__('La ligne '.$forfait->type.' a été sauvegardée.'));
                         array_push($lignes,$ligne);
                     }
                 }
                 $fich->lignesforfaits=$lignes;
-                if ($this->Fiches->save($fich)) {
-                    $this->Flash->success(__('Les lignes ont été sauvegardées.'));
-                }
                 return $this->redirect(['action' => 'myficheslist']);
             }
             $this->Flash->error(__('La fiche n\'a pas pu être sauvegardée. Reesayez plus tard.'));
@@ -195,7 +217,7 @@ class FichesController extends AppController
             if ($this->Fiches->Lignesfraishorsforfaits->save($lfhf)) {
                 $this->Flash->success(__('The ligne hors-forfait has been saved.'));
 
-                return $this->redirect(['action' => 'myfichesview', $id]);
+                return $this->redirect(['action' => 'myfichesedit', $id]);
             }
             $this->Flash->error(__('The ligne hors-forfait could not be saved. Please, try again.'));
         }
@@ -213,7 +235,7 @@ class FichesController extends AppController
             $this->Flash->error(__('The lignesfraishorsforfait could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'myfichesview', $id]);
+        return $this->redirect(['action' => 'myfichesedit', $id]);
     }
 
     public function edithf($id = null, $idhf = null)
@@ -226,7 +248,7 @@ class FichesController extends AppController
             if ($this->Fiches->Lignesfraishorsforfaits->save($lignesfraishorsforfait)) {
                 $this->Flash->success(__('The lignesfraishorsforfait has been saved.'));
 
-                return $this->redirect(['action' => 'myfichesview', $id]);
+                return $this->redirect(['action' => 'myfichesedit', $id]);
             }
             $this->Flash->error(__('The lignesfraishorsforfait could not be saved. Please, try again.'));
         }

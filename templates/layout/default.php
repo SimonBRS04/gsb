@@ -42,20 +42,26 @@ $cakeDescription = 'Créateur de Fiches';
         </div>
         <div class="top-nav-links">
         <?php
-        echo $this->Html->Link('myFichesList (Usr)', ['plugin' => NULL, 'controller'=>'fiches', 'action'=>'myficheslist']);
-        echo $this->Html->Link('Ficheslist (Cbl)', ['plugin' => NULL, 'controller'=>'fiches', 'action'=>'ficheslist']);
-        echo $this->Html->Link('Fiches (/)', ['plugin' => NULL, 'controller'=>'fiches']);
-        echo $this->Html->Link('LignesF (/)', ['plugin' => NULL, 'controller'=>'lignesforfaits']);
-        echo $this->Html->Link('LignesHF (/)', ['plugin' => NULL, 'controller'=>'lignesfraishorsforfaits']);
-        echo $this->Html->Link('Etats (x)', ['plugin' => NULL, 'controller'=>'etats']);
-        echo $this->Html->Link('Forfaits (x)', ['plugin' => NULL, 'controller'=>'forfaits']);
-        echo $this->Html->Link('Users (x)', ['plugin'=>'CakeDC/Users', 'controller'=>'users', 'action'=>'index']);    
+        $identity = $this->getRequest()->getAttribute('identity');
+        $identity = $identity ?? [];
+        $role = $identity["role"];
+        
+        if ($role == "user" || $role == "superuser" ) {       
+            echo $this->Html->Link('myFichesList (Usr)', ['plugin' => NULL, 'controller'=>'fiches', 'action'=>'myficheslist']);
+        }
+        if ($role == "comptable" || $role == "superuser" ){
+            echo $this->Html->Link('Ficheslist (Cbl)', ['plugin' => NULL, 'controller'=>'fiches', 'action'=>'ficheslist']);
+        }
+        if ($role == "superuser" )  {      
+            echo $this->Html->Link('Fiches (/)', ['plugin' => NULL, 'controller'=>'fiches']);
+            echo $this->Html->Link('LignesF (/)', ['plugin' => NULL, 'controller'=>'lignesforfaits']);
+            echo $this->Html->Link('LignesHF (/)', ['plugin' => NULL, 'controller'=>'lignesfraishorsforfaits']);
+            echo $this->Html->Link('Etats (x)', ['plugin' => NULL, 'controller'=>'etats']);
+            echo $this->Html->Link('Forfaits (x)', ['plugin' => NULL, 'controller'=>'forfaits']);
+            echo $this->Html->Link('Users (x)', ['plugin'=>'CakeDC/Users', 'controller'=>'users', 'action'=>'index']);    
+        }
         echo $this->Html->Link('Profil (o)', ['plugin'=>'CakeDC/Users', 'controller'=>'users', 'action'=>'profile']);            
-        echo $this->Html->Link(
-            'Disconnect', 
-            ['plugin'=>'CakeDC/Users', 'controller'=>'users', 'action'=>'logout'], 
-            ['onclick' => "return confirm('Êtes-vous sûr de vouloir vous déconnecter ?');"]
-        );        
+        echo $this->Html->Link('Disconnect', ['plugin'=>'CakeDC/Users', 'controller'=>'users', 'action'=>'logout'], ['onclick' => "return confirm('Êtes-vous sûr de vouloir vous déconnecter ?');"]);        
         ?>
 
         </div>

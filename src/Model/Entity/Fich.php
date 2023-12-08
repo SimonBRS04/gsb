@@ -13,7 +13,6 @@ use Cake\ORM\Entity;
  * @property int $etat_id
  * @property string $moisannee
  * @property int|null $nbjustificatifs
- * @property bool $montantvalide
  * @property \Cake\I18n\FrozenDate $datemodif
  *
  * @property \CakeDC\Users\Model\Entity\User $user

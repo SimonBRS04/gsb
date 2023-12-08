@@ -1,7 +1,7 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <?= $this->Html->link(__('<--- Retour'), ['action' => 'myfichesview', $id], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('<--- Retour'), ['action' => 'myfichesedit', $id], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">

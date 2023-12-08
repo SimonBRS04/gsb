@@ -89,10 +89,7 @@ class FichesTable extends Table
 
         $validator->integer('nbjustificatifs');
 
-        $validator
-            ->boolean('montantvalide')
-            ->requirePresence('montantvalide', 'create')
-            ->notEmptyString('montantvalide');
+        $validator->boolean('montantvalide');
 
         $validator
             ->date('datemodif')

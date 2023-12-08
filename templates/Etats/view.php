@@ -36,8 +36,6 @@
                             <th><?= __('Id') ?></th>
                             <th><?= __('User') ?></th>
                             <th><?= __('Moisannee') ?></th>
-                            <th><?= __('Nbjustificatifs') ?></th>
-                            <th><?= __('Montantvalide') ?></th>
                             <th><?= __('Datemodif') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
@@ -46,8 +44,6 @@
                             <td><?= h($fiches->id) ?></td>
                             <td><?= h($fiches->user->username) ?></td>
                             <td><?= h($fiches->moisannee) ?></td>
-                            <td><?= h($fiches->nbjustificatifs) ?></td>
-                            <td><?= h($fiches->montantvalide) ?></td>
                             <td><?= h($fiches->datemodif) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Fiches', 'action' => 'view', $fiches->id]) ?>
