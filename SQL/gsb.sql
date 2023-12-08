@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 07 déc. 2023 à 15:06
+-- Généré le : ven. 08 déc. 2023 à 11:34
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.0.28
 
@@ -87,14 +87,15 @@ CREATE TABLE `fiches` (
 --
 
 INSERT INTO `fiches` (`id`, `user_id`, `etat_id`, `moisannee`, `nbjustificatifs`, `montantvalide`, `datemodif`) VALUES
-(5, '0b6a9cad-b1ec-4e7a-96cf-88e3d5dca018', 1, '112023', 0, 1, '2023-11-17'),
+(5, '0b6a9cad-b1ec-4e7a-96cf-88e3d5dca018', 3, '112023', 0, 1, '2023-11-17'),
 (6, '0b6a9cad-b1ec-4e7a-96cf-88e3d5dca018', 4, '102023', 0, 1, '2023-11-17'),
 (7, '2c0f4879-618f-4ed7-9605-491b45fc6b91', 1, '112023', 0, 1, '2023-11-17'),
 (8, '2c0f4879-618f-4ed7-9605-491b45fc6b91', 3, '102023', 0, 1, '2023-10-17'),
-(32, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, '202023', NULL, 1, '2023-02-22'),
-(40, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, 'lkfdshbp', NULL, 0, '2023-11-23'),
-(41, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, 'fiche test', 0, 0, '2023-11-23'),
-(43, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, 'g', NULL, 0, '2023-11-23');
+(49, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, 'Test deletehfs', NULL, 0, '2023-12-08'),
+(50, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, '012000', NULL, 0, '2023-12-08'),
+(51, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, '022000', NULL, 0, '2023-12-08'),
+(52, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, '032000', NULL, 0, '2023-12-08'),
+(53, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, '042000', NULL, 0, '2023-12-08');
 
 -- --------------------------------------------------------
 
@@ -121,30 +122,18 @@ INSERT INTO `fiches_lignesforfaits` (`fiche_id`, `ligneforfait_id`) VALUES
 (7, 15),
 (7, 16),
 (7, 17),
-(32, 70),
-(32, 71),
-(32, 72),
-(32, 73),
-(32, 74),
-(32, 75),
-(40, 118),
-(40, 119),
-(40, 120),
-(40, 121),
-(40, 122),
-(40, 123),
-(41, 124),
-(41, 125),
-(41, 126),
-(41, 127),
-(41, 128),
-(41, 129),
-(43, 136),
-(43, 137),
-(43, 138),
-(43, 139),
-(43, 140),
-(43, 141);
+(49, 166),
+(49, 167),
+(49, 168),
+(49, 169),
+(49, 170),
+(49, 171),
+(50, 172),
+(50, 173),
+(50, 174),
+(50, 175),
+(50, 176),
+(50, 177);
 
 -- --------------------------------------------------------
 
@@ -166,7 +155,9 @@ INSERT INTO `fiches_lignesfraishorsforfaits` (`lignesfraishorsforfait_id`, `fich
 (6, 6),
 (7, 6),
 (8, 8),
-(9, 8);
+(9, 8),
+(106, 49),
+(108, 49);
 
 -- --------------------------------------------------------
 
@@ -327,8 +318,8 @@ INSERT INTO `lignesforfaits` (`id`, `forfait_id`, `quantite`) VALUES
 (124, 2, 7),
 (125, 3, 1),
 (126, 4, 5),
-(127, 5, 0),
-(128, 6, 0),
+(127, 5, 15),
+(128, 6, 76),
 (129, 7, 1),
 (130, 2, 0),
 (131, 3, 0),
@@ -341,7 +332,61 @@ INSERT INTO `lignesforfaits` (`id`, `forfait_id`, `quantite`) VALUES
 (138, 4, 0),
 (139, 5, 2),
 (140, 6, 0),
-(141, 7, 300);
+(141, 7, 300),
+(142, 2, 0),
+(143, 3, 0),
+(144, 4, 0),
+(145, 5, 0),
+(146, 6, 0),
+(147, 7, 0),
+(148, 2, 0),
+(149, 3, 0),
+(150, 4, 0),
+(151, 5, 0),
+(152, 6, 0),
+(153, 7, 0),
+(154, 2, 0),
+(155, 3, 0),
+(156, 4, 0),
+(157, 5, 0),
+(158, 6, 0),
+(159, 7, 0),
+(160, 2, 0),
+(161, 3, 0),
+(162, 4, 0),
+(163, 5, 0),
+(164, 6, 0),
+(165, 7, 0),
+(166, 2, 6),
+(167, 3, 5),
+(168, 4, 4),
+(169, 5, 3),
+(170, 6, 2),
+(171, 7, 1),
+(172, 2, 0),
+(173, 3, 0),
+(174, 4, 0),
+(175, 5, 0),
+(176, 6, 0),
+(177, 7, 0),
+(178, 2, 0),
+(179, 3, 0),
+(180, 4, 0),
+(181, 5, 0),
+(182, 6, 0),
+(183, 7, 0),
+(184, 2, 0),
+(185, 3, 0),
+(186, 4, 0),
+(187, 5, 0),
+(188, 6, 0),
+(189, 7, 0),
+(190, 2, 0),
+(191, 3, 0),
+(192, 4, 0),
+(193, 5, 0),
+(194, 6, 0),
+(195, 7, 0);
 
 -- --------------------------------------------------------
 
@@ -365,7 +410,9 @@ INSERT INTO `lignesfraishorsforfaits` (`id`, `date`, `montant`, `libelle`) VALUE
 (6, '2023-11-17', 50, 'Retrait'),
 (7, '2023-11-17', 50, 'Banquet'),
 (8, '2023-11-17', 200, 'Jaccuzi'),
-(9, '2023-11-17', 4000, 'Setup Gaming');
+(9, '2023-11-17', 4000, 'Setup Gaming'),
+(106, '2020-02-20', 2121, 'N1'),
+(108, '2020-02-20', 2323, 'N3');
 
 -- --------------------------------------------------------
 
@@ -512,7 +559,7 @@ ALTER TABLE `etats`
 -- AUTO_INCREMENT pour la table `fiches`
 --
 ALTER TABLE `fiches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT pour la table `forfaits`
@@ -524,13 +571,13 @@ ALTER TABLE `forfaits`
 -- AUTO_INCREMENT pour la table `lignesforfaits`
 --
 ALTER TABLE `lignesforfaits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
 
 --
 -- AUTO_INCREMENT pour la table `lignesfraishorsforfaits`
 --
 ALTER TABLE `lignesfraishorsforfaits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- Contraintes pour les tables déchargées
