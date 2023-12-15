@@ -12,7 +12,6 @@ use Cake\ORM\Entity;
  * @property string $user_id
  * @property int $etat_id
  * @property string $moisannee
- * @property int|null $nbjustificatifs
  * @property \Cake\I18n\FrozenDate $datemodif
  *
  * @property \CakeDC\Users\Model\Entity\User $user
@@ -35,8 +34,6 @@ class Fich extends Entity
         'user_id' => true,
         'etat_id' => true,
         'moisannee' => true,
-        'nbjustificatifs' => true,
-        'montantvalide' => true,
         'datemodif' => true,
         'user' => true,
         'etat' => true,

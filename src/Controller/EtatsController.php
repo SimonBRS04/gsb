@@ -18,6 +18,7 @@ class EtatsController extends AppController
      */
     public function index()
     {
+        $this->set('showHeader', true);
         $etats = $this->paginate($this->Etats);
 
         $this->set(compact('etats'));
@@ -32,6 +33,7 @@ class EtatsController extends AppController
      */
     public function view($id = null)
     {
+        $this->set('showHeader', true);
         $etat = $this->Etats->get($id, [
             'contain' => ['Fiches','Fiches.Users'],
         ]);
@@ -46,6 +48,7 @@ class EtatsController extends AppController
      */
     public function add()
     {
+        $this->set('showHeader', true);
         $etat = $this->Etats->newEmptyEntity();
         if ($this->request->is('post')) {
             $etat = $this->Etats->patchEntity($etat, $this->request->getData());
@@ -68,6 +71,7 @@ class EtatsController extends AppController
      */
     public function edit($id = null)
     {
+        $this->set('showHeader', true);
         $etat = $this->Etats->get($id, [
             'contain' => [],
         ]);
@@ -92,6 +96,7 @@ class EtatsController extends AppController
      */
     public function delete($id = null)
     {
+        $this->set('showHeader', true);
         $this->request->allowMethod(['post', 'delete']);
         $etat = $this->Etats->get($id);
         if ($this->Etats->delete($etat)) {

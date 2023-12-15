@@ -39,10 +39,12 @@ class AppController extends Controller
      */
     public function initialize(): void
     {
+        $this->set('showHeader', true);
         parent::initialize();
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.

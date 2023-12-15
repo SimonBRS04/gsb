@@ -23,8 +23,6 @@ class FichesFixture extends TestFixture
                 'user_id' => '2c6bb8d1-b25e-493a-b760-34e38dcba9e9',
                 'etat_id' => 1,
                 'moisannee' => 'Lorem ipsum dolor ',
-                'nbjustificatifs' => 1,
-                'montantvalide' => 1,
                 'datemodif' => '2023-10-17',
             ],
         ];

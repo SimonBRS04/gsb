@@ -18,6 +18,7 @@ class LignesfraishorsforfaitsController extends AppController
      */
     public function index()
     {
+        $this->set('showHeader', true);
         $lignesfraishorsforfaits = $this->paginate($this->Lignesfraishorsforfaits);
 
         $this->set(compact('lignesfraishorsforfaits'));
@@ -32,6 +33,7 @@ class LignesfraishorsforfaitsController extends AppController
      */
     public function view($id = null)
     {
+        $this->set('showHeader', true);
         $lignesfraishorsforfait = $this->Lignesfraishorsforfaits->get($id, [
             'contain' => ['Fiches'],
         ]);
@@ -46,6 +48,7 @@ class LignesfraishorsforfaitsController extends AppController
      */
     public function add()
     {
+        $this->set('showHeader', true);
         $lignesfraishorsforfait = $this->Lignesfraishorsforfaits->newEmptyEntity();
         if ($this->request->is('post')) {
             $lignesfraishorsforfait = $this->Lignesfraishorsforfaits->patchEntity($lignesfraishorsforfait, $this->request->getData());
@@ -69,6 +72,7 @@ class LignesfraishorsforfaitsController extends AppController
      */
     public function edit($id = null)
     {
+        $this->set('showHeader', true);
         $lignesfraishorsforfait = $this->Lignesfraishorsforfaits->get($id, [
             'contain' => ['Fiches'],
         ]);
@@ -94,6 +98,7 @@ class LignesfraishorsforfaitsController extends AppController
      */
     public function delete($id = null)
     {
+        $this->set('showHeader', true);
         $this->request->allowMethod(['post', 'delete']);
         $lignesfraishorsforfait = $this->Lignesfraishorsforfaits->get($id);
         if ($this->Lignesfraishorsforfaits->delete($lignesfraishorsforfait)) {

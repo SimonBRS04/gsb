@@ -45,6 +45,7 @@ class PagesController extends AppController
      */
     public function display(string ...$path): ?Response
     {
+        $this->set('showHeader', true);
         if (!$path) {
             return $this->redirect('/');
         }

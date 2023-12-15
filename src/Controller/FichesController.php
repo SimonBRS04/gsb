@@ -19,6 +19,7 @@ class FichesController extends AppController
      */
     public function index()
     {
+        $this->set('showHeader', true);
         $this->paginate = [
             'contain' => ['Users', 'Etats'],
         ];
@@ -36,6 +37,7 @@ class FichesController extends AppController
      */
     public function view($id = null)
     {
+        $this->set('showHeader', true);
         $fich = $this->Fiches->get($id, [
             'contain' => ['Users', 'Etats'],
         ]);
@@ -50,6 +52,7 @@ class FichesController extends AppController
      */
     public function add()
     {
+        $this->set('showHeader', true);
         $fich = $this->Fiches->newEmptyEntity();
         if ($this->request->is('post')) {
             $fich = $this->Fiches->patchEntity($fich, $this->request->getData());
@@ -74,6 +77,7 @@ class FichesController extends AppController
      */
     public function edit($id = null)
     {
+        $this->set('showHeader', true);
         $fich = $this->Fiches->get($id, [
             'contain' => [],
         ]);
@@ -100,6 +104,7 @@ class FichesController extends AppController
      */
     public function delete($id = null)
     {
+        $this->set('showHeader', true);
         $this->request->allowMethod(['post', 'delete']);
         $fich = $this->Fiches->get($id);
         if ($this->Fiches->delete($fich)) {
@@ -113,6 +118,7 @@ class FichesController extends AppController
 
     public function myficheslist()
     {
+        $this->set('showHeader', true);
         $this->paginate = [
             'contain' => ['Users', 'Etats'],
         ];
@@ -126,6 +132,7 @@ class FichesController extends AppController
 
     public function myfichesview($id = null)
     {
+        $this->set('showHeader', true);
         $fich = $this->Fiches->get($id, [
             'contain' => ['Lignesforfaits','Lignesforfaits.Forfaits','Lignesfraishorsforfaits','Users','Etats'],
         ]);
@@ -136,7 +143,9 @@ class FichesController extends AppController
 
     }
 
-    public function modifetats($id_fich = null, $id_etat = null){
+    public function modifetats($id_fich = null, $id_etat = null)
+    {
+        $this->set('showHeader', true);
         $fich = $this->Fiches->get($id_fich, [
             'contain' => ['Lignesforfaits','Lignesforfaits.Forfaits','Lignesfraishorsforfaits','Users','Etats'],
         ]);
@@ -150,6 +159,7 @@ class FichesController extends AppController
 
     public function myfichesedit($id = null)
     {
+        $this->set('showHeader', true);
         $fich = $this->Fiches->get($id, [
             'contain' => ['Lignesforfaits','Lignesforfaits.Forfaits','Lignesfraishorsforfaits','Users','Etats'],
         ]);
@@ -177,6 +187,7 @@ class FichesController extends AppController
 
     public function myfichesadd()
     {
+        $this->set('showHeader', true);
         $fich = $this->Fiches->newEmptyEntity();
         if ($this->request->is('post')) {
             $data =  $this->request->getData();
@@ -211,6 +222,7 @@ class FichesController extends AppController
 
     public function myfichesaddhf($id = null)
     {
+        $this->set('showHeader', true);
         $lfhf = $this->Fiches->Lignesfraishorsforfaits->newEmptyEntity();
         if ($this->request->is('post')) {
             $lfhf = $this->Fiches->Lignesfraishorsforfaits->patchEntity($lfhf, $this->request->getData());
@@ -227,6 +239,7 @@ class FichesController extends AppController
 
     public function deletehf($id = null, $idhf = null)
     {
+        $this->set('showHeader', true);
         $this->request->allowMethod(['post', 'delete']);
         $lignesfraishorsforfait = $this->Fiches->Lignesfraishorsforfaits->get($idhf);
         if ($this->Fiches->Lignesfraishorsforfaits->delete($lignesfraishorsforfait)) {
@@ -240,6 +253,7 @@ class FichesController extends AppController
 
     public function edithf($id = null, $idhf = null)
     {
+        $this->set('showHeader', true);
         $lignesfraishorsforfait = $this->Fiches->Lignesfraishorsforfaits->get($idhf, [
             'contain' => ['Fiches'],
         ]);
@@ -258,6 +272,7 @@ class FichesController extends AppController
 
     public function ficheslist()
     {
+        $this->set('showHeader', true);
         $this->paginate = [
             'contain' => ['Users', 'Etats'],
         ];

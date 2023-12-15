@@ -21,7 +21,7 @@
                         <?= $this->Html->link(__('Voir'), ['action' => 'myfichesview', $fich->id]) ?>
                         <?php if($fich->etat->id == 1){ ?>
                             <?= $this->Html->link(__('Modifier'), ['action' => 'myfichesedit', $fich->id]) ?>
-                            <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $fich->id],    ['confirm' => __('Are you sure you want to delete # {0}?', $fich->id)]) ?>
+                            <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $fich->id],    ['confirm' => __('Voulez vous vraiment supprimer la fiche du {0}?', $fich->moisannee)]) ?>
                         <?php }?>
                     </td>
                 </tr>

@@ -27,7 +27,6 @@
                     echo $this->Form->control('user_id', ['options' => $users]);
                     echo $this->Form->control('etat_id', ['options' => $etats]);
                     echo $this->Form->control('moisannee');
-                    echo $this->Form->control('montantvalide');
                     echo $this->Form->control('datemodif');
                 ?>
             </fieldset>

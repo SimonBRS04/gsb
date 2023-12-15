@@ -83,13 +83,9 @@ class FichesTable extends Table
 
         $validator
             ->scalar('moisannee')
-            ->maxLength('moisannee', 20)
+            ->maxLength('moisannee', 6)
             ->requirePresence('moisannee', 'create')
             ->notEmptyString('moisannee');
-
-        $validator->integer('nbjustificatifs');
-
-        $validator->boolean('montantvalide');
 
         $validator
             ->date('datemodif')

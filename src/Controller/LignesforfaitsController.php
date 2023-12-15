@@ -18,6 +18,7 @@ class LignesforfaitsController extends AppController
      */
     public function index()
     {
+        $this->set('showHeader', true);
         $this->paginate = [
             'contain' => ['Forfaits'],
         ];
@@ -35,6 +36,7 @@ class LignesforfaitsController extends AppController
      */
     public function view($id = null)
     {
+        $this->set('showHeader', true);
         $lignesforfait = $this->Lignesforfaits->get($id, [
             'contain' => ['Forfaits'],
         ]);
@@ -49,6 +51,7 @@ class LignesforfaitsController extends AppController
      */
     public function add()
     {
+        $this->set('showHeader', true);
         $lignesforfait = $this->Lignesforfaits->newEmptyEntity();
         if ($this->request->is('post')) {
             $lignesforfait = $this->Lignesforfaits->patchEntity($lignesforfait, $this->request->getData());
@@ -72,6 +75,7 @@ class LignesforfaitsController extends AppController
      */
     public function edit($id = null)
     {
+        $this->set('showHeader', true);
         $lignesforfait = $this->Lignesforfaits->get($id, [
             'contain' => [],
         ]);
@@ -97,6 +101,7 @@ class LignesforfaitsController extends AppController
      */
     public function delete($id = null)
     {
+        $this->set('showHeader', true);
         $this->request->allowMethod(['post', 'delete']);
         $lignesforfait = $this->Lignesforfaits->get($id);
         if ($this->Lignesforfaits->delete($lignesforfait)) {

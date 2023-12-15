@@ -36,16 +36,8 @@
                     <td><?= $this->Number->format($fich->id) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Nbjustificatifs') ?></th>
-                    <td><?= $this->Number->format($fich->nbjustificatifs) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Datemodif') ?></th>
                     <td><?= h($fich->datemodif) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Montantvalide') ?></th>
-                    <td><?= $fich->montantvalide ? __('Yes') : __('No'); ?></td>
                 </tr>
             </table>
         </div>

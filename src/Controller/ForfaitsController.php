@@ -18,6 +18,7 @@ class ForfaitsController extends AppController
      */
     public function index()
     {
+        $this->set('showHeader', true);
         $forfaits = $this->paginate($this->Forfaits);
 
         $this->set(compact('forfaits'));
@@ -32,6 +33,7 @@ class ForfaitsController extends AppController
      */
     public function view($id = null)
     {
+        $this->set('showHeader', true);
         $forfait = $this->Forfaits->get($id, [
             'contain' => ['Lignesforfaits'],
         ]);
@@ -46,6 +48,7 @@ class ForfaitsController extends AppController
      */
     public function add()
     {
+        $this->set('showHeader', true);
         $forfait = $this->Forfaits->newEmptyEntity();
         if ($this->request->is('post')) {
             $forfait = $this->Forfaits->patchEntity($forfait, $this->request->getData());
@@ -68,6 +71,7 @@ class ForfaitsController extends AppController
      */
     public function edit($id = null)
     {
+        $this->set('showHeader', true);
         $forfait = $this->Forfaits->get($id, [
             'contain' => [],
         ]);
@@ -92,6 +96,7 @@ class ForfaitsController extends AppController
      */
     public function delete($id = null)
     {
+        $this->set('showHeader', true);
         $this->request->allowMethod(['post', 'delete']);
         $forfait = $this->Forfaits->get($id);
         if ($this->Forfaits->delete($forfait)) {

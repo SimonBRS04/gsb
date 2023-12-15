@@ -10,7 +10,7 @@
             <fieldset>
                 <legend><?= __('Ajouter la Fiche') ?></legend>
                 <?php
-                    echo $this->Form->control('moisannee');
+                    echo $this->Form->control('moisannee', ['placeholder' => 'exemple : 012023']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Envoyer')) ?>
