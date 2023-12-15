@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -57,7 +58,7 @@ class FichesController extends AppController
         if ($this->request->is('post')) {
             $fich = $this->Fiches->patchEntity($fich, $this->request->getData());
             if ($this->Fiches->save($fich)) {
-                $this->Flash->success(__('La fiche vide a été sauvegardée.'));
+                $this->Flash->success(__('La fiche a été sauvegardée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
@@ -130,33 +131,6 @@ class FichesController extends AppController
         $this->set(compact('fiches'));
     }
 
-    public function myfichesview($id = null)
-    {
-        $this->set('showHeader', true);
-        $fich = $this->Fiches->get($id, [
-            'contain' => ['Lignesforfaits','Lignesforfaits.Forfaits','Lignesfraishorsforfaits','Users','Etats'],
-        ]);
-        $identity = $this->getRequest()->getAttribute('identity');
-            $identity = $identity ?? [];
-            $iduser = $identity["id"];
-        $this->set(compact('fich', 'id'));
-
-    }
-
-    public function modifetats($id_fich = null, $id_etat = null)
-    {
-        $this->set('showHeader', true);
-        $fich = $this->Fiches->get($id_fich, [
-            'contain' => ['Lignesforfaits','Lignesforfaits.Forfaits','Lignesfraishorsforfaits','Users','Etats'],
-        ]);
-        $fich->etat_id = $id_etat;
-        $this->Fiches->save($fich);
-        if ($this->Fiches->save($fich)) {
-            $this->Flash->success(__('La fiche a été sauvegardée.'));
-        }
-        return $this->redirect(['action' => 'myfichesview', $id_fich]);
-    }
-
     public function myfichesedit($id = null)
     {
         $this->set('showHeader', true);
@@ -167,6 +141,7 @@ class FichesController extends AppController
             $identity = $identity ?? [];
             $iduser = $identity["id"];
         $this->set(compact('fich', 'id'));
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             foreach($this->request->getData() as $key=>$val){
                 if (str_starts_with($key,'l_')){
@@ -191,12 +166,14 @@ class FichesController extends AppController
         $fich = $this->Fiches->newEmptyEntity();
         if ($this->request->is('post')) {
             $data =  $this->request->getData();
-            $fich = $this->Fiches->patchEntity($fich,$data);
+            $fich = $this->Fiches->patchEntity($fich,$data); 
+
             $fich->etat_id = 1;
             $identity = $this->getRequest()->getAttribute('identity');
             $identity = $identity ?? [];
             $fich->user_id = $identity["id"];
             $fich->datemodif = FrozenDate::now();
+
             if ($this->Fiches->save($fich)) {
                 $this->Flash->success(__('La fiche du '.$fich->moisannee.' a été créée.'));
                 // ADD DES FORFAITS
@@ -211,7 +188,9 @@ class FichesController extends AppController
                     }
                 }
                 $fich->lignesforfaits=$lignes;
-                return $this->redirect(['action' => 'myficheslist']);
+                $this->Fiches->save($fich);
+                
+                return $this->redirect(['action' => 'myfichesedit',$fich->id]);
             }
             $this->Flash->error(__('La fiche n\'a pas pu être sauvegardée. Reesayez plus tard.'));
         }
@@ -224,19 +203,20 @@ class FichesController extends AppController
     {
         $this->set('showHeader', true);
         $lfhf = $this->Fiches->Lignesfraishorsforfaits->newEmptyEntity();
+        // $lfhf->fiches._ids = $id;
         if ($this->request->is('post')) {
             $lfhf = $this->Fiches->Lignesfraishorsforfaits->patchEntity($lfhf, $this->request->getData());
             if ($this->Fiches->Lignesfraishorsforfaits->save($lfhf)) {
                 $this->Flash->success(__('The ligne hors-forfait has been saved.'));
+                
 
                 return $this->redirect(['action' => 'myfichesedit', $id]);
             }
             $this->Flash->error(__('The ligne hors-forfait could not be saved. Please, try again.'));
         }
         $fiches = $this->Fiches->find('list', ['limit' => 200])->all();
-        $this->set(compact('lfhf', 'id', 'fiches'));
+        $this->set(compact('lfhf','id', 'fiches'));
     }
-
     public function deletehf($id = null, $idhf = null)
     {
         $this->set('showHeader', true);
@@ -250,7 +230,6 @@ class FichesController extends AppController
 
         return $this->redirect(['action' => 'myfichesedit', $id]);
     }
-
     public function edithf($id = null, $idhf = null)
     {
         $this->set('showHeader', true);
@@ -267,18 +246,53 @@ class FichesController extends AppController
             $this->Flash->error(__('The lignesfraishorsforfait could not be saved. Please, try again.'));
         }
         $fiches = $this->Fiches->Lignesfraishorsforfaits->Fiches->find('list', ['limit' => 200])->all();
-        $this->set(compact('lignesfraishorsforfait', 'fiches', 'id' ));
+        $this->set(compact('lignesfraishorsforfait', 'fiches', 'id'));
     }
-
     public function ficheslist()
     {
         $this->set('showHeader', true);
         $this->paginate = [
             'contain' => ['Users', 'Etats'],
         ];
-        $fiches = $this->paginate($this->Fiches);
+        $fichelist=$this->Fiches->find('all')->order("moisannee");
+        $fiches = $this->paginate($fichelist);
 
         $this->set(compact('fiches'));
+    }
+    public function myfichesview($id = null)
+    {
+        $this->set('showHeader', true);
+        $fich = $this->Fiches->get($id, [
+            'contain' => ['Lignesforfaits','Lignesforfaits.Forfaits','Lignesfraishorsforfaits','Users','Etats'],
+        ]);
+        $identity = $this->getRequest()->getAttribute('identity');
+            $identity = $identity ?? [];
+            $iduser = $identity["id"];
+        $this->set(compact('fich', 'id'));
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            foreach($this->request->getData() as $key=>$val){
+                if (str_starts_with($key,'l_')){
+                    $ligne_id = str_replace('l_', '', $key);
+                    $ligne = $this->Fiches->Lignesforfaits->get($ligne_id);
+                    $ligne->quantite=$val;
+                    $this->Fiches->Lignesforfaits->save($ligne);
+                }
+            }
+        return $this->redirect(['action' => 'myfichesview', $id]);
+        }
+    }
+    public function modifetats($id_fich = null, $id_etat = null){
+        $this->set('showHeader', true);
+        $fich = $this->Fiches->get($id_fich, [
+            'contain' => ['Lignesforfaits','Lignesforfaits.Forfaits','Lignesfraishorsforfaits','Users','Etats'],
+        ]);
+        $fich->etat_id = $id_etat;
+        $this->Fiches->save($fich);
+        if ($this->Fiches->save($fich)) {
+            $this->Flash->success(__('La fiche a été sauvegardée.'));
+        }
+        return $this->redirect(['action' => 'myfichesview', $id_fich]);
     }
 
 }
