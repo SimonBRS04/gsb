@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 08 déc. 2023 à 11:34
+-- Généré le : ven. 12 jan. 2024 à 09:15
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.0.28
 
@@ -76,9 +76,7 @@ CREATE TABLE `fiches` (
   `id` int(11) NOT NULL,
   `user_id` char(36) NOT NULL,
   `etat_id` int(11) NOT NULL,
-  `moisannee` varchar(20) NOT NULL,
-  `nbjustificatifs` int(11) DEFAULT NULL,
-  `montantvalide` tinyint(1) NOT NULL,
+  `moisannee` varchar(6) NOT NULL,
   `datemodif` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -86,16 +84,17 @@ CREATE TABLE `fiches` (
 -- Déchargement des données de la table `fiches`
 --
 
-INSERT INTO `fiches` (`id`, `user_id`, `etat_id`, `moisannee`, `nbjustificatifs`, `montantvalide`, `datemodif`) VALUES
-(5, '0b6a9cad-b1ec-4e7a-96cf-88e3d5dca018', 3, '112023', 0, 1, '2023-11-17'),
-(6, '0b6a9cad-b1ec-4e7a-96cf-88e3d5dca018', 4, '102023', 0, 1, '2023-11-17'),
-(7, '2c0f4879-618f-4ed7-9605-491b45fc6b91', 1, '112023', 0, 1, '2023-11-17'),
-(8, '2c0f4879-618f-4ed7-9605-491b45fc6b91', 3, '102023', 0, 1, '2023-10-17'),
-(49, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, 'Test deletehfs', NULL, 0, '2023-12-08'),
-(50, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, '012000', NULL, 0, '2023-12-08'),
-(51, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, '022000', NULL, 0, '2023-12-08'),
-(52, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, '032000', NULL, 0, '2023-12-08'),
-(53, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, '042000', NULL, 0, '2023-12-08');
+INSERT INTO `fiches` (`id`, `user_id`, `etat_id`, `moisannee`, `datemodif`) VALUES
+(5, '0b6a9cad-b1ec-4e7a-96cf-88e3d5dca018', 2, '112023', '2023-12-08'),
+(6, '0b6a9cad-b1ec-4e7a-96cf-88e3d5dca018', 4, '102023', '2023-12-08'),
+(8, '2c0f4879-618f-4ed7-9605-491b45fc6b91', 3, '102023', '2023-12-08'),
+(50, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, '012000', '2023-12-08'),
+(51, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, '022000', '2023-12-08'),
+(52, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, '032000', '2023-12-08'),
+(53, 'd56a9b83-b3aa-4bae-8884-07665b414a45', 1, '042000', '2023-12-08'),
+(56, '0b6a9cad-b1ec-4e7a-96cf-88e3d5dca018', 1, '112011', '2023-12-15'),
+(57, '0b6a9cad-b1ec-4e7a-96cf-88e3d5dca018', 1, '022005', '2023-12-15'),
+(58, '0b6a9cad-b1ec-4e7a-96cf-88e3d5dca018', 3, '052004', '2023-12-15');
 
 -- --------------------------------------------------------
 
@@ -119,21 +118,18 @@ INSERT INTO `fiches_lignesforfaits` (`fiche_id`, `ligneforfait_id`) VALUES
 (6, 12),
 (6, 13),
 (6, 14),
-(7, 15),
-(7, 16),
-(7, 17),
-(49, 166),
-(49, 167),
-(49, 168),
-(49, 169),
-(49, 170),
-(49, 171),
 (50, 172),
 (50, 173),
 (50, 174),
 (50, 175),
 (50, 176),
-(50, 177);
+(50, 177),
+(58, 214),
+(58, 215),
+(58, 216),
+(58, 217),
+(58, 218),
+(58, 219);
 
 -- --------------------------------------------------------
 
@@ -156,8 +152,7 @@ INSERT INTO `fiches_lignesfraishorsforfaits` (`lignesfraishorsforfait_id`, `fich
 (7, 6),
 (8, 8),
 (9, 8),
-(106, 49),
-(108, 49);
+(109, 58);
 
 -- --------------------------------------------------------
 
@@ -386,7 +381,31 @@ INSERT INTO `lignesforfaits` (`id`, `forfait_id`, `quantite`) VALUES
 (192, 4, 0),
 (193, 5, 0),
 (194, 6, 0),
-(195, 7, 0);
+(195, 7, 0),
+(196, 2, 0),
+(197, 3, 0),
+(198, 4, 0),
+(199, 5, 0),
+(200, 6, 0),
+(201, 7, 0),
+(202, 2, 0),
+(203, 3, 0),
+(204, 4, 0),
+(205, 5, 0),
+(206, 6, 0),
+(207, 7, 0),
+(208, 2, 0),
+(209, 3, 0),
+(210, 4, 0),
+(211, 5, 0),
+(212, 6, 0),
+(213, 7, 0),
+(214, 2, 4),
+(215, 3, 0),
+(216, 4, 9),
+(217, 5, 0),
+(218, 6, 70),
+(219, 7, 0);
 
 -- --------------------------------------------------------
 
@@ -412,7 +431,8 @@ INSERT INTO `lignesfraishorsforfaits` (`id`, `date`, `montant`, `libelle`) VALUE
 (8, '2023-11-17', 200, 'Jaccuzi'),
 (9, '2023-11-17', 4000, 'Setup Gaming'),
 (106, '2020-02-20', 2121, 'N1'),
-(108, '2020-02-20', 2323, 'N3');
+(108, '2020-02-20', 2323, 'N3'),
+(109, '2023-12-15', 50, 'dépenses lambda');
 
 -- --------------------------------------------------------
 
@@ -473,6 +493,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `first_name`, `last_name`, `token`, `token_expires`, `api_token`, `activation_date`, `secret`, `secret_verified`, `tos_date`, `active`, `is_superuser`, `role`, `created`, `modified`, `additional_data`) VALUES
 ('0b6a9cad-b1ec-4e7a-96cf-88e3d5dca018', 'user2', 'user2@gmail.com', '$2y$10$YZeiUTW5.R.GtmVAdee2jOblncI3zACuCcj1gAWoNpWwCott4Drvq', 'User', '2', 'a3dd53dac574f9a79a2d9baad69a0960', '2023-11-17 09:03:14', NULL, NULL, NULL, NULL, '2023-11-17 08:03:14', 1, 0, 'user', '2023-11-17 08:03:14', '2023-11-17 08:03:14', NULL),
 ('2c0f4879-618f-4ed7-9605-491b45fc6b91', 'user1', 'user1@gmail.com', '$2y$10$bU/hZsI1f.hXVoCGzbxy8uYWL8lGTGkWo77tW7SiTG1F0q.5fKj0S', 'User', '1', 'beb6bf192a1344d7daf61769251a281d', '2023-11-17 09:01:08', NULL, NULL, NULL, NULL, '2023-11-17 08:01:08', 1, 0, 'user', '2023-11-17 08:01:08', '2023-11-17 08:01:08', NULL),
+('a6d456fc-0f33-4d51-b12b-81d3590f81ab', 'comptable', 'comptable@gmail.com', '$2y$10$RwlxeVO0grhSfd6Qe3gU5.kyaWmkrNoW.XweTKAjmt5qjDtMFz8Ta', 'con', 'table', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 'comptable', '2023-12-08 12:38:00', '2023-12-08 12:38:00', NULL),
 ('d56a9b83-b3aa-4bae-8884-07665b414a45', 'admin', 'simon.brsi@gmail.com', '$2y$10$6nPmsUHfgN5Ceoet7uqfTe/I96.21kpAodH40xssXo9.3SAnbaF2y', 'Admin', 'Istrateur', NULL, NULL, '', '2023-10-19 12:55:20', NULL, NULL, '2023-10-17 08:35:36', 1, 1, 'superuser', '2023-10-17 08:35:36', '2023-11-10 08:08:46', NULL);
 
 --
@@ -559,7 +580,7 @@ ALTER TABLE `etats`
 -- AUTO_INCREMENT pour la table `fiches`
 --
 ALTER TABLE `fiches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT pour la table `forfaits`
@@ -571,13 +592,13 @@ ALTER TABLE `forfaits`
 -- AUTO_INCREMENT pour la table `lignesforfaits`
 --
 ALTER TABLE `lignesforfaits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=220;
 
 --
 -- AUTO_INCREMENT pour la table `lignesfraishorsforfaits`
 --
 ALTER TABLE `lignesfraishorsforfaits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- Contraintes pour les tables déchargées
