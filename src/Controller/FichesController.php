@@ -217,6 +217,7 @@ class FichesController extends AppController
         $fiches = $this->Fiches->find('list', ['limit' => 200])->all();
         $this->set(compact('lfhf','id', 'fiches'));
     }
+
     public function deletehf($id = null, $idhf = null)
     {
         $this->set('showHeader', true);
@@ -285,6 +286,7 @@ class FichesController extends AppController
         return $this->redirect(['action' => 'myfichesview', $id]);
         }
     }
+    
     public function modifetats($id_fich = null, $id_etat = null){
         $this->set('showHeader', true);
         $fich = $this->Fiches->get($id_fich, [

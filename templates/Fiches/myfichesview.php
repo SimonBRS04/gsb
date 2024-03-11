@@ -18,15 +18,13 @@
     if ($role == "superuser" ){ 
         echo($this->Html->link(__('<--- Retour'), ['action' => 'index'], ['class' => 'side-nav-item']));
     }
-    ?>
+?>
 <!-- FIN ATTRIBUTION DES DROITS -->
 
-<br/>
-<h4>Nom : <?= h($fich->user->last_name)?> </h4>
+<br/><h4>Nom : <?= h($fich->user->last_name)?> </h4>
 <h4>Prénom : <?= h($fich->user->first_name) ?> </h4>
 <h4>Dernière modification : <?= h($fich->datemodif) ?></h4>
 <h4>Fiche du : <?= h($fich->moisannee) ?></h4>
-
 
 <!-- DEBUT ATTRIBUTION DES DROITS POUR LE COMPTABLE UNIQUEMENT -->
 <?php 
@@ -39,7 +37,6 @@
 <!-- FIN ATTRIBUTION DES DROITS POUR LE COMPTABLE UNIQUEMENT -->
 
 <br/>
-
 <table>
     <h3>Dépense comprise dans le forfait :</h3>    
     <thead>
@@ -52,8 +49,6 @@
         </tr>
     </thead>
     <tbody>
-        
-
         <?php $total_f = 0;
         foreach ($fich->lignesforfaits as $lignesforfait): ?>
             <tr>
@@ -74,16 +69,10 @@
                 </td>
             </tr>
             <?php $total_f = $total_f + ($lignesforfait->forfait->prix * $lignesforfait->quantite) ?>
-
         <?php endforeach; ?>
-        
     </tbody>
 </table>
-
-<br/><?= "Total F : ", $total_f?><br/>
-
-<br/>
-
+<br/><?= "Total F : ", $total_f?><br/><br/>
 <table>
     <h3>Autres dépenses :</h3>
     <thead>
@@ -104,14 +93,5 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-
 <br/><?= "Total HF : ", $total_hf?><br/>
 <br/><?= "Total Final : ", ($total_hf + $total_f)?><br/>
-
-
-
-
-
-<!-- DEBUGS -->
-
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
