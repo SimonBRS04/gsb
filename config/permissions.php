@@ -51,7 +51,7 @@
 
 return [
     'CakeDC/Auth.permissions' => [
-        //all bypass
+        // Bypass all
         [
             'prefix' => false,
             'plugin' => 'CakeDC/Users',
@@ -97,7 +97,7 @@ return [
             ],
             'bypassAuth' => true,
         ],
-        //admin role allowed to all the things
+        // Admin role allowed to do all the things
         [
             'role' => 'admin',
             'prefix' => '*',
@@ -106,7 +106,7 @@ return [
             'controller' => '*',
             'action' => '*',
         ],
-        //specific actions allowed for the all roles in Users plugin
+        // Specific actions allowed for all the roles in Users plugin
         [
             'role' => '*',
             'plugin' => 'CakeDC/Users',
@@ -127,7 +127,7 @@ return [
                 return false;
             }
         ],
-        //all roles allowed to Pages/display
+        // All roles allowed to access Pages/display
         [
             'role' => '*',
             'controller' => 'Pages',
