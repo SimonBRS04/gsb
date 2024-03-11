@@ -148,7 +148,7 @@ return [
         [
             'role' => 'user',
             'controller' => '*',
-            'action' => ['myficheslist', 'myfichesview', 'myfichesedit', 'myfichesadd', 'myfichesaddhf', 'delete', 'deletehf'],
+            'action' => ['myficheslist', 'myfichesview', 'myfichesedit', 'myfichesadd', 'myfichesaddhf', 'delete', 'deletehf', 'edithf'],
         ],
         [
             'role' => 'comptable',

@@ -230,6 +230,7 @@ class FichesController extends AppController
 
         return $this->redirect(['action' => 'myfichesedit', $id]);
     }
+
     public function edithf($id = null, $idhf = null)
     {
         $this->set('showHeader', true);
@@ -248,6 +249,7 @@ class FichesController extends AppController
         $fiches = $this->Fiches->Lignesfraishorsforfaits->Fiches->find('list', ['limit' => 200])->all();
         $this->set(compact('lignesfraishorsforfait', 'fiches', 'id'));
     }
+
     public function ficheslist()
     {
         $this->set('showHeader', true);
@@ -259,6 +261,7 @@ class FichesController extends AppController
 
         $this->set(compact('fiches'));
     }
+    
     public function myfichesview($id = null)
     {
         $this->set('showHeader', true);
