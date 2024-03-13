@@ -53,11 +53,11 @@ class LignesfraishorsforfaitsController extends AppController
         if ($this->request->is('post')) {
             $lignesfraishorsforfait = $this->Lignesfraishorsforfaits->patchEntity($lignesfraishorsforfait, $this->request->getData());
             if ($this->Lignesfraishorsforfaits->save($lignesfraishorsforfait)) {
-                $this->Flash->success(__('The lignesfraishorsforfait has been saved.'));
+                $this->Flash->success(__('La lignefraishorsforfait a été sauvegardée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lignesfraishorsforfait could not be saved. Please, try again.'));
+            $this->Flash->error(__('La lignefraishorsforfait n\'a pas pu être sauvegardée, réessayez.'));
         }
         $fiches = $this->Lignesfraishorsforfaits->Fiches->find('list', ['limit' => 200])->all();
         $this->set(compact('lignesfraishorsforfait', 'fiches'));
@@ -79,11 +79,11 @@ class LignesfraishorsforfaitsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $lignesfraishorsforfait = $this->Lignesfraishorsforfaits->patchEntity($lignesfraishorsforfait, $this->request->getData());
             if ($this->Lignesfraishorsforfaits->save($lignesfraishorsforfait)) {
-                $this->Flash->success(__('The lignesfraishorsforfait has been saved.'));
+                $this->Flash->success(__('La lignefraishorsforfait a été sauvegardée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lignesfraishorsforfait could not be saved. Please, try again.'));
+            $this->Flash->error(__('La lignefraishorsforfait n\'a pas pu être sauvegardée, réessayez.'));
         }
         $fiches = $this->Lignesfraishorsforfaits->Fiches->find('list', ['limit' => 200])->all();
         $this->set(compact('lignesfraishorsforfait', 'fiches'));
@@ -102,9 +102,9 @@ class LignesfraishorsforfaitsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $lignesfraishorsforfait = $this->Lignesfraishorsforfaits->get($id);
         if ($this->Lignesfraishorsforfaits->delete($lignesfraishorsforfait)) {
-            $this->Flash->success(__('The lignesfraishorsforfait has been deleted.'));
+                $this->Flash->success(__('La lignefraishorsforfait a été supprimée.'));
         } else {
-            $this->Flash->error(__('The lignesfraishorsforfait could not be deleted. Please, try again.'));
+            $this->Flash->error(__('La lignefraishorsforfait n\'a pas pu être supprimée, réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

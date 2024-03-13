@@ -53,11 +53,11 @@ class ForfaitsController extends AppController
         if ($this->request->is('post')) {
             $forfait = $this->Forfaits->patchEntity($forfait, $this->request->getData());
             if ($this->Forfaits->save($forfait)) {
-                $this->Flash->success(__('The forfait has been saved.'));
+                $this->Flash->success(__('Le forfait à été sauvegardé.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The forfait could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le forfait n\'a pas pu être sauvegardé, réessayez.'));
         }
         $this->set(compact('forfait'));
     }
@@ -78,11 +78,11 @@ class ForfaitsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $forfait = $this->Forfaits->patchEntity($forfait, $this->request->getData());
             if ($this->Forfaits->save($forfait)) {
-                $this->Flash->success(__('The forfait has been saved.'));
+                $this->Flash->success(__('Le forfait à été sauvegardé.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The forfait could not be saved. Please, try again.'));
+            $this->Flash->error(__('Le forfait n\'a pas pu être sauvegardé, réessayez.'));
         }
         $this->set(compact('forfait'));
     }
@@ -100,9 +100,9 @@ class ForfaitsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $forfait = $this->Forfaits->get($id);
         if ($this->Forfaits->delete($forfait)) {
-            $this->Flash->success(__('The forfait has been deleted.'));
+            $this->Flash->success(__('Le forfait à été supprimé.'));
         } else {
-            $this->Flash->error(__('The forfait could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Le forfait n\'a pas pu être supprimé, réessayez.'));
         }
 
         return $this->redirect(['action' => 'index']);

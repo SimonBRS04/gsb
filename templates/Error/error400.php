@@ -39,3 +39,6 @@ endif;
     <strong><?= __d('cake', 'Error') ?>: </strong>
     <?= __d('cake', 'The requested address {0} was not found on this server.', "<strong>'{$url}'</strong>") ?>
 </p>
+
+<!-- $this->Flash->error('Une erreur est survenue, vous avez été renvoyé vers la page d\'accueil.');
+return $this->Url->build('/'); -->

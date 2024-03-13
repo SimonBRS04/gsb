@@ -56,11 +56,11 @@ class LignesforfaitsController extends AppController
         if ($this->request->is('post')) {
             $lignesforfait = $this->Lignesforfaits->patchEntity($lignesforfait, $this->request->getData());
             if ($this->Lignesforfaits->save($lignesforfait)) {
-                $this->Flash->success(__('The lignesforfait has been saved.'));
+                $this->Flash->success(__('La ligneforfait a été sauvegardée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lignesforfait could not be saved. Please, try again.'));
+            $this->Flash->error(__('La ligneforfait n\'a pas pu être sauvegardée.'));
         }
         $forfaits = $this->Lignesforfaits->Forfaits->find('list', ['limit' => 200])->all();
         $this->set(compact('lignesforfait', 'forfaits'));
@@ -82,11 +82,11 @@ class LignesforfaitsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $lignesforfait = $this->Lignesforfaits->patchEntity($lignesforfait, $this->request->getData());
             if ($this->Lignesforfaits->save($lignesforfait)) {
-                $this->Flash->success(__('The lignesforfait has been saved.'));
+                $this->Flash->success(__('La ligneforfait a été sauvegardée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lignesforfait could not be saved. Please, try again.'));
+            $this->Flash->error(__('La ligneforfait n\'a pas pu être sauvegardée.'));
         }
         $forfaits = $this->Lignesforfaits->Forfaits->find('list', ['limit' => 200])->all();
         $this->set(compact('lignesforfait', 'forfaits'));
@@ -105,9 +105,9 @@ class LignesforfaitsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $lignesforfait = $this->Lignesforfaits->get($id);
         if ($this->Lignesforfaits->delete($lignesforfait)) {
-            $this->Flash->success(__('The lignesforfait has been deleted.'));
+            $this->Flash->success(__('La ligneforfait a été supprimée.'));
         } else {
-            $this->Flash->error(__('The lignesforfait could not be deleted. Please, try again.'));
+            $this->Flash->error(__('La ligneforfait n\'a pas pu être supprimée.'));
         }
 
         return $this->redirect(['action' => 'index']);

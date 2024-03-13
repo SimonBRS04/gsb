@@ -53,11 +53,11 @@ class EtatsController extends AppController
         if ($this->request->is('post')) {
             $etat = $this->Etats->patchEntity($etat, $this->request->getData());
             if ($this->Etats->save($etat)) {
-                $this->Flash->success(__('The etat has been saved.'));
+                $this->Flash->success(__('L\'état a été sauvegardé.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The etat could not be saved. Please, try again.'));
+            $this->Flash->error(__('L\'état n\'a pas pu être sauvegardé, réessayez'));
         }
         $this->set(compact('etat'));
     }
@@ -78,11 +78,11 @@ class EtatsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $etat = $this->Etats->patchEntity($etat, $this->request->getData());
             if ($this->Etats->save($etat)) {
-                $this->Flash->success(__('The etat has been saved.'));
+                $this->Flash->success(__('L\'état a été sauvegardé.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The etat could not be saved. Please, try again.'));
+            $this->Flash->error(__('L\'état n\'a pas pu être sauvegardé, réessayez'));
         }
         $this->set(compact('etat'));
     }
@@ -100,9 +100,9 @@ class EtatsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $etat = $this->Etats->get($id);
         if ($this->Etats->delete($etat)) {
-            $this->Flash->success(__('The etat has been deleted.'));
+            $this->Flash->success(__('L\'état a été supprimé.'));
         } else {
-            $this->Flash->error(__('The etat could not be deleted. Please, try again.'));
+            $this->Flash->error(__('L\'état n\'a pas pu être supprimé, réessayez'));
         }
 
         return $this->redirect(['action' => 'index']);

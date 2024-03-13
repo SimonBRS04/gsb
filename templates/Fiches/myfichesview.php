@@ -25,11 +25,11 @@
 <h4>Prénom : <?= h($fich->user->first_name) ?> </h4>
 <h4>Dernière modification : <?= h($fich->datemodif) ?></h4>
 <h4>Fiche du : <?= h($fich->moisannee) ?></h4>
+<h4>Etat actuel de la fiche : <?= h($fich->etat->libelle);?></h4>
 
 <!-- DEBUT ATTRIBUTION DES DROITS POUR LE COMPTABLE UNIQUEMENT -->
 <?php 
-  if ($role == "comptable" || $role == "superuser" ){
-    ?><h4>Etat actuel de la fiche : <?= h($fich->etat->libelle);?> </h4>
+  if ($role == "comptable" || $role == "superuser" ){ ?>
     <?php echo $this->Html->Link('Valider la fiche', ['action'=>'modifetats', $fich->id, 3], ['class' => 'button']); ?>
     <?php echo $this->Html->Link('Cloturer la fiche', ['action'=>'modifetats', $fich->id, 2], ['class' => 'button']); 
   }

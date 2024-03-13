@@ -43,3 +43,6 @@ endif;
     <strong><?= __d('cake', 'Error') ?>: </strong>
     <?= h($message) ?>
 </p>
+
+<!-- $this->Flash->error('Une erreur est survenue, vous avez été renvoyé vers la page d\'accueil.');
+return $this->Url->build('/'); -->

@@ -19,6 +19,7 @@
 <h4>Prénom : <?= h($fich->user->first_name) ?> </h4>
 <h4>Dernière modification : <?= h($fich->datemodif) ?></h4>
 <h4>Fiche du : <?= h($fich->moisannee) ?></h4><br/>
+<h4>Etat actuel de la fiche : <?= h($fich->etat->libelle);?></h4>
 
 <table>
     <h3>Dépense comprise dans le forfait :</h3>    
