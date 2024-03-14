@@ -15,10 +15,13 @@
 ?>
 <!-- FIN ATTRIBUTION DES DROITS -->
 
-<br/><h4>Nom : <?= h($fich->user->last_name)?> </h4>
-<h4>Prénom : <?= h($fich->user->first_name) ?> </h4>
-<h4>Dernière modification : <?= h($fich->datemodif) ?></h4>
-<h4>Fiche du : <?= h($fich->moisannee) ?></h4><br/>
+
+<br/>
+<div style="display:flex; flex-direction:row; gap:100px;">
+    <h4>Nom : <?= h($fich->user->last_name)?> </h4>
+    <h4>Prénom : <?= h($fich->user->first_name) ?> </h4>
+</div>
+<h4>Fiche du : <?= h($fich->moisannee) ?></h4>
 <h4>Etat actuel de la fiche : <?= h($fich->etat->libelle);?></h4>
 
 <table>
@@ -45,8 +48,7 @@
                 </td>
                 <td>
                 <?php echo $this->Form->input('l_'.$lignesforfait->id, [
-                    'defaultValue' => 'Valeur par défaut',
-                    'value' => $lignesforfait->quantite, 
+                    'value' => $lignesforfait->quantite
                 ]); ?>
                 </td>
                 <td>
@@ -64,7 +66,7 @@
 </table>
 <br/><?= $this->Form->button(__('Sauvegarder')) ?>
 <?= $this->Form->end() ?>
-<br/><?= "Total F : ", $total_f?><br/><br/>
+<br/><?= "Total F : ", $total_f?>€<br/><br/>
 <table>
     <h3>Autres dépenses :</h3>
     <thead>
@@ -89,5 +91,7 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-<br/><?= "Total HF : ", $total_hf?><br/>
-<br/><?= "Total Final : ", ($total_hf + $total_f)?><br/>
+<br/><?= "Total HF : ", $total_hf?>€<br/>
+<br/><h4><?= "Total Final : ", ($total_hf + $total_f)?> €</h4>
+
+<br/>Dernière modification le <?= h($fich->datemodif) ?><br/>

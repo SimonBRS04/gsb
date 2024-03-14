@@ -21,17 +21,23 @@
 ?>
 <!-- FIN ATTRIBUTION DES DROITS -->
 
-<br/><h4>Nom : <?= h($fich->user->last_name)?> </h4>
-<h4>Prénom : <?= h($fich->user->first_name) ?> </h4>
-<h4>Dernière modification : <?= h($fich->datemodif) ?></h4>
+<br/>
+<div style="display:flex; flex-direction:row; gap:100px;">
+    <h4>Nom : <?= h($fich->user->last_name)?> </h4>
+    <h4>Prénom : <?= h($fich->user->first_name) ?> </h4>
+</div>
 <h4>Fiche du : <?= h($fich->moisannee) ?></h4>
 <h4>Etat actuel de la fiche : <?= h($fich->etat->libelle);?></h4>
 
 <!-- DEBUT ATTRIBUTION DES DROITS POUR LE COMPTABLE UNIQUEMENT -->
+
 <?php 
-  if ($role == "comptable" || $role == "superuser" ){ ?>
-    <?php echo $this->Html->Link('Valider la fiche', ['action'=>'modifetats', $fich->id, 3], ['class' => 'button']); ?>
-    <?php echo $this->Html->Link('Cloturer la fiche', ['action'=>'modifetats', $fich->id, 2], ['class' => 'button']); 
+  if ($role == "comptable" || $role == "superuser" ){ 
+    echo $this->Html->Link('Valider la fiche', ['action'=>'modifetats', $fich->id, 3], ['class' => 'button']); 
+    echo $this->Html->Link('Cloturer la fiche', ['action'=>'modifetats', $fich->id, 2], ['class' => 'button']); 
+    /*?><br/><?php
+    echo $this->Html->Link('Mettre la fiche en payement', ['action'=>'modifetats', $fich->id, 4], ['class' => 'button']); 
+    echo $this->Html->Link('Rembourser la fiche', ['action'=>'modifetats', $fich->id, 5], ['class' => 'button']);*/
   }
 ?>
 <!-- FIN ATTRIBUTION DES DROITS POUR LE COMPTABLE UNIQUEMENT -->
@@ -72,7 +78,7 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-<br/><?= "Total F : ", $total_f?><br/><br/>
+<br/><?= "Total F : ", $total_f?>€<br/><br/>
 <table>
     <h3>Autres dépenses :</h3>
     <thead>
@@ -93,5 +99,7 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-<br/><?= "Total HF : ", $total_hf?><br/>
-<br/><?= "Total Final : ", ($total_hf + $total_f)?><br/>
+<br/><?= "Total HF : ", $total_hf?>€<br/>
+<br/><h4><?= "Total Final : ", ($total_hf + $total_f)?> €</h4>
+
+<br/>Dernière modification le <?= h($fich->datemodif) ?><br/>

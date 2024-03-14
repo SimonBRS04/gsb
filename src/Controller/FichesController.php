@@ -141,8 +141,7 @@ class FichesController extends AppController
             $identity = $identity ?? [];
             $iduser = $identity["id"];
         $this->set(compact('fich', 'id'));
-
-        if ($fich->etat == "Créée"){
+        if ($fich->etat_id == 1){
             if ($this->request->is(['patch', 'post', 'put'])) {
                 foreach($this->request->getData() as $key=>$val){
                     if (str_starts_with($key,'l_')){
