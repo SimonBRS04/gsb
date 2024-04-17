@@ -256,17 +256,40 @@ class FichesController extends AppController
         $this->set(compact('lignesfraishorsforfait', 'fiches', 'id'));
     }
 
+
+
+
+
+
+
     public function ficheslist()
     {
+
         $this->set('showHeader', true);
         $this->paginate = [
             'contain' => ['Users', 'Etats'],
         ];
-        $fichelist=$this->Fiches->find('all')->order("moisannee");
-        $fiches = $this->paginate($fichelist);
+        $fichelist = $this->Fiches->find('all')->order("moisannee");
+        if ($this->request->is(['patch', 'post', 'put'])) {
+                // echo($_POST['user_choisi']);
+                // echo('<br/>');
+                // echo($_POST['annee_choisie']);
+                // echo('<br/>');
+            $fichelist = $this->Fiches->find('all')->where(['username' => $_POST['user_choisi']])->order("moisannee");
+            $fichelist = $this->Fiches->find('all')->where(['username' => $_POST['user_choisi']])->where([right('moisannee', 4) => $_POST['annee_choisie']])->order("moisannee");
+            // $fichelist = $this->Fiches->find('all')->where(['username' => $_POST['user_choisi']])->where('moisannee' => ['%' . $_POST['annee_choisie']])->order("moisannee");
 
+        }
+        $fiches = $this->paginate($fichelist);
         $this->set(compact('fiches'));
     }
+
+
+
+
+
+
+
     
     public function myfichesview($id = null)
     {

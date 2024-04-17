@@ -92,6 +92,10 @@ class FichesTable extends Table
             ->requirePresence('datemodif', 'create')
             ->notEmptyDate('datemodif');
 
+        $validator
+            ->integer('montanttotal')
+            ->notEmptyString('montanttotal');
+
         return $validator;
     }
 
