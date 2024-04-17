@@ -276,7 +276,7 @@ class FichesController extends AppController
                 // echo($_POST['annee_choisie']);
                 // echo('<br/>');
             $fichelist = $this->Fiches->find('all')->where(['username' => $_POST['user_choisi']])->order("moisannee");
-            $fichelist = $this->Fiches->find('all')->where(['username' => $_POST['user_choisi']])->where([right('moisannee', 4) => $_POST['annee_choisie']])->order("moisannee");
+            // $fichelist = $this->Fiches->find('all')->where(['username' => $_POST['user_choisi']])->where([right('moisannee', 4) => $_POST['annee_choisie']])->order("moisannee");
             // $fichelist = $this->Fiches->find('all')->where(['username' => $_POST['user_choisi']])->where('moisannee' => ['%' . $_POST['annee_choisie']])->order("moisannee");
 
         }
